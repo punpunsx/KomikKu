@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+
+            <RelativeLayout
+                android:id="@+id/parentSlider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <TextView
+                    android:id="@+id/txtKomikJepangJp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15sp"
+                    android:layout_marginTop="15sp"
+                    android:layout_marginEnd="15sp"
+                    android:text="@string/komikJepang"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/txtKomikJepangId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15sp"
+                    android:layout_marginEnd="15sp"
+                    android:layout_below="@id/txtKomikJepangJp"
+                    android:text="@string/komik_jepang"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    />
+
+
+                <com.github.islamkhsh.CardSliderViewPager
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:auto_slide_time="3"
+                    android:layout_below="@id/txtKomikJepangId"
+                    app:cardSlider_indicator="@id/indicator"
+                    android:id="@+id/rvKomikJepangSlider"/>
+
+                <com.github.islamkhsh.CardSliderIndicator
+                    android:id="@+id/indicator"
+                    android:layout_width="56dp"
+                    android:layout_height="25dp"
+                    android:layout_alignStart="@id/txtKomikJepangJp"
+                    android:layout_below="@id/rvKomikJepangSlider"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp" />
+
+                <TextView
+                    android:id="@+id/txtGenreJp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/indicator"
+                    android:layout_marginStart="15sp"
+                    android:layout_marginTop="15sp"
+                    android:layout_marginEnd="15sp"
+                    android:text="ジャンル一覧"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/txtGenreId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15sp"
+                    android:layout_marginEnd="15sp"
+                    android:layout_below="@id/txtGenreJp"
+                    android:text="List Genre"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtGenreId"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_genre"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:overScrollMode="never"
+                    android:id="@+id/rvListGenre"/>
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/txtReleaseJp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/parentSlider"
+                android:layout_marginTop="10dp"
+                android:text="漫画最新情報"
+                android:layout_marginStart="15sp"
+                android:layout_marginEnd="15sp"
+                android:textSize="20sp"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"/>
+
+            <TextView
+                android:id="@+id/txtReleaseId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15sp"
+                android:layout_marginEnd="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtReleaseJp"
+                android:text="Update komik terbaru"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/txtReleaseId"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:overScrollMode="never"
+                android:id="@+id/rvRelease"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/komikKorea"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                app:layout_constraintTop_toBottomOf="@id/rvRelease"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_margin="15sp"
+                android:id="@+id/txtKomikKoreaKr"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/komik_korea"
+                android:layout_marginStart="15sp"
+                android:layout_marginEnd="15sp"
+                android:layout_marginBottom="15sp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                app:layout_constraintTop_toBottomOf="@id/txtKomikKoreaKr"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/txtKomikKoreaId"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:overScrollMode="never"
+                app:layout_constraintTop_toBottomOf="@id/txtKomikKoreaId"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/rvKomikKorea"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/komikChina"
+                app:layout_constraintTop_toBottomOf="@id/rvKomikKorea"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_margin="15sp"
+                android:textStyle="bold"
+                android:id="@+id/txtKomikChinaCh"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/komik_china"
+                android:layout_marginStart="15sp"
+                android:layout_marginEnd="15sp"
+                android:layout_marginBottom="15sp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                app:layout_constraintTop_toBottomOf="@id/txtKomikChinaCh"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/txtKomikChinaId"/>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:overScrollMode="never"
+                app:layout_constraintTop_toBottomOf="@id/txtKomikChinaId"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/rvKomikChina"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="20dp"
+        android:src="@drawable/baseline_search_24"
+        android:id="@+id/btn_Sarch"
+        android:contentDescription="@string/seacrh_komik" />
+
+</RelativeLayout>

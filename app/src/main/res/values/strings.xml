@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">KomikU</string>
+    <string name="home">Home</string>
+    <string name="update">Update</string>
+    <string name="favorite">Favorite</string>
+    <string name="riwayat">Riwayat</string>
+    <string name="pengaturan">Pengaturan</string>
+    <string name="seacrh_komik">seacrh komik</string>
+    <string name="komik_china">Komik China</string>
+    <string name="komikChina">中国漫画</string>
+    <string name="komik_korea">Komik Korea</string>
+    <string name="komikKorea">한국 만화</string>
+    <string name="komik_jepang">Komik Jepang</string>
+    <string name="komikJepang">日本の漫画</string>
+</resources>
