@@ -2,7 +2,8 @@
 # KomikU Apps
 
 Data dari app ini diambil dari Api https://github.com/KatowProject/komikato_py,
-Jika app tidak berfungsi mungkin api yg digunakan oleh app ini sudah mati
+Jika app tidak berfungsi mungkin api yg digunakan oleh app ini sudah mati,
+App ini masih dalam tahap pengembangan
 
 ## Authors 
 
