@@ -1,4 +1,4 @@
-package com.komikatow.komiku.ui.activity;
+package com.komikatow.komiku.ui.activityes;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -70,7 +70,7 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
             public void onHttpsResponse(JSONObject jsonObject) {
 
                 try {
-
+                    final String type = getIntent().getStringExtra("type");
                     titleKomik = jsonObject.getString("title").replace("\n", " ").trim();
                     thumbnail = jsonObject.getString("thumb");
                     endpointDetail = getIntent().getStringExtra("endpoint");
@@ -89,7 +89,7 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
                     getBinding().tvIlustrator.setText("Illustrator : "+jsonObject.getString("illustator").trim());
                     getBinding().tvRating.setRating(Float.parseFloat(jsonObject.getString("score").trim()));
 
-                    if (getIntent().getStringExtra("type")!= null || getIntent().getStringExtra("type") != " "){
+                    if (type != null && !type.isEmpty()){
                         getBinding().tvType.setText("Type : "+getIntent().getStringExtra("type"));
                     } else{
                         getBinding().tvType.setVisibility(View.GONE);
@@ -100,7 +100,7 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    DialogsKt.dialogProgrees.dismiss();
+                    DialogsKt.dismissDialogLoading();
                 }
             }
 
@@ -108,7 +108,7 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
             public void onHttpsError(ANError anError) {
 
                 Toast.makeText(DetailActivity.this, "Error at : "+anError.getErrorBody(), Toast.LENGTH_SHORT).show();
-                DialogsKt.dialogProgrees.dismiss();
+                DialogsKt.dismissDialogLoading();
             }
         });
     }

@@ -11,10 +11,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/border_text"
         android:gravity="center_horizontal"
-        android:maxLines="2"
+        android:maxLines="1"
+        android:padding="5dp"
         android:layout_margin="10dp"
         android:ellipsize="end"
-        android:padding="10sp"
         android:text="Psycological\n2"
         />
 

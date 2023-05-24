@@ -13,7 +13,7 @@ import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.komikatow.komiku.databinding.ItemHomeKomikChinaKoreaBinding;
 import com.komikatow.komiku.model.ModelBaseKomik;
-import com.komikatow.komiku.ui.activity.DetailActivity;
+import com.komikatow.komiku.ui.activityes.DetailActivity;
 
 import java.util.List;
 

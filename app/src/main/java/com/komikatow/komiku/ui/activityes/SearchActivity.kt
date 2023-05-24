@@ -1,4 +1,4 @@
-package com.komikatow.komiku.ui.activity
+package com.komikatow.komiku.ui.activityes
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -43,12 +43,13 @@ class SearchActivity : BaseActivity <ActivitySearchBinding> () {
 
                 binding.toolbar.title = newText
                 binding.searchProgress.visibility = View.VISIBLE
-                listSearch.clear()
+
 
                 Networking.HttpsRequest(Endpoints.KOMIK_ALL_SEARCH+newText+"/?page=1",this@SearchActivity, object : Networking.Response{
 
                     @SuppressLint("NotifyDataSetChanged")
                     override fun onHttpsResponse(jsonObject: JSONObject) {
+                        listSearch.clear()
 
                         val jsonArray = jsonObject.getJSONArray("mangas")
                         for (i in 0 until jsonArray.length()){
@@ -61,10 +62,7 @@ class SearchActivity : BaseActivity <ActivitySearchBinding> () {
                             modelBaseKomik.thumbnail = mangas.getString("thumb")
                             modelBaseKomik.type = " "
                             modelBaseKomik.endPoint = link.getString("endpoint")
-
-                            val adapterKomik = AdapterKomik(this@SearchActivity, listSearch)
                             listSearch.add(modelBaseKomik)
-                            adapterKomik.notifyDataSetChanged()
 
                         }
                         adapterSearch(listSearch)
@@ -81,11 +79,13 @@ class SearchActivity : BaseActivity <ActivitySearchBinding> () {
         })
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun adapterSearch(listSearch: MutableList<ModelBaseKomik<String>>) {
 
         val adapterKomik = AdapterKomik(this, listSearch)
         binding.searchResult.layoutManager = GridLayoutManager(this, 3)
         binding.searchResult.adapter = adapterKomik
+        adapterKomik.notifyDataSetChanged()
         binding.searchProgress.visibility = View.INVISIBLE
 
     }

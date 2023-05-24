@@ -12,14 +12,13 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.navigation.NavigationBarView;
 import com.komikatow.komiku.databinding.ActivityMainBinding;
-import com.komikatow.komiku.ui.activity.BaseActivity;
+import com.komikatow.komiku.ui.activityes.BaseActivity;
 import com.komikatow.komiku.ui.fragments.FragmentFavorite;
 import com.komikatow.komiku.ui.fragments.FragmentHome;
 import com.komikatow.komiku.ui.fragments.FragmentRiwayat;
 import com.komikatow.komiku.ui.fragments.FragmentUpdate;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 public final class MainActivity extends BaseActivity <ActivityMainBinding> implements NavigationBarView.OnItemSelectedListener {

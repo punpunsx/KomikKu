@@ -1,4 +1,4 @@
-package com.komikatow.komiku.ui.activity;
+package com.komikatow.komiku.ui.activityes;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -40,7 +40,7 @@ public final class GenreDetail extends BaseActivity <ActivityGenreDetailBinding>
         super.onCreate(savedInstanceState);
 
         DialogsKt.setDialogLoading(this, "Loading...", "Sedang memuat konten mohon tunggu sebentar", false);
-        DialogsKt.dialogProgrees.show();
+        DialogsKt.showDialogLoading();
         getBinding().toolbar.setNavigationOnClickListener(v-> finish());
 
         getGenreDetail();
@@ -84,14 +84,14 @@ public final class GenreDetail extends BaseActivity <ActivityGenreDetailBinding>
                     adapterGenreDetail(genreList);
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    DialogsKt.dialogProgrees.dismiss();
+                    DialogsKt.dismissDialogLoading();
                 }
 
             }
 
             @Override
             public void onHttpsError(ANError anError) {
-                DialogsKt.dialogProgrees.dismiss();
+                DialogsKt.dismissDialogLoading();
                 anError.printStackTrace();
             }
         });
@@ -102,7 +102,7 @@ public final class GenreDetail extends BaseActivity <ActivityGenreDetailBinding>
         AdapterKomik adapterKomik = new AdapterKomik(this, genreList);
         getBinding().rvGenreDetail.setLayoutManager(new GridLayoutManager(this, 3));
         getBinding().rvGenreDetail.setAdapter(adapterKomik);
-        DialogsKt.dialogProgrees.dismiss();
+        DialogsKt.dismissDialogLoading();
 
     }
 
@@ -116,7 +116,7 @@ public final class GenreDetail extends BaseActivity <ActivityGenreDetailBinding>
 
             }else {
                 pageCount--;
-                DialogsKt.dialogProgrees.show();
+                DialogsKt.showDialogLoading();
                 getBinding().btnGenreSebelumnya.setEnabled(true);
                 getGenreDetail();
             }
@@ -126,7 +126,7 @@ public final class GenreDetail extends BaseActivity <ActivityGenreDetailBinding>
 
             pageCount++;
             getBinding().btnGenreSebelumnya.setEnabled(true);
-            DialogsKt.dialogProgrees.show();
+            DialogsKt.showDialogLoading();
             getGenreDetail();
         });
 

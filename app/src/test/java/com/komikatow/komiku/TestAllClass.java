@@ -2,7 +2,7 @@ package com.komikatow.komiku;
 
 import org.junit.Test;
 
-import com.komikatow.komiku.ui.activity.DetailActivity;
+import com.komikatow.komiku.ui.activityes.DetailActivity;
 import com.komikatow.komiku.ui.fragments.BaseFragment;
 import com.komikatow.komiku.ui.fragments.FragmentHome;
 

@@ -19,9 +19,9 @@ import com.komikatow.komiku.adapter.AdapterKomikJepang;
 import com.komikatow.komiku.databinding.FragmentHomeBinding;
 import com.komikatow.komiku.model.ModelBaseKomik;
 import com.komikatow.komiku.model.ModelGenre;
-import com.komikatow.komiku.ui.activity.DetailActivity;
-import com.komikatow.komiku.ui.activity.GenreDetail;
-import com.komikatow.komiku.ui.activity.SearchActivity;
+import com.komikatow.komiku.ui.activityes.DetailActivity;
+import com.komikatow.komiku.ui.activityes.GenreDetail;
+import com.komikatow.komiku.ui.activityes.SearchActivity;
 import com.komikatow.komiku.utils.DialogsKt;
 import com.komikatow.komiku.utils.Endpoints;
 import com.komikatow.komiku.utils.ItemRecyclerClick;
@@ -52,7 +52,7 @@ public final class FragmentHome extends BaseFragment <FragmentHomeBinding> imple
 
         getBinding().btnSarch.setOnClickListener(v-> startActivity(new Intent(getContext(), SearchActivity.class)));
         DialogsKt.setDialogLoading(requireContext(), "Loading...", "Mohon tunggu sebentar", false);
-        DialogsKt.dialogProgrees.show();
+        DialogsKt.showDialogLoading();
 
         getResponseKomikJepang();
         getResponseGenreList();
@@ -288,7 +288,7 @@ public final class FragmentHome extends BaseFragment <FragmentHomeBinding> imple
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    DialogsKt.dialogProgrees.dismiss();
+                    DialogsKt.dismissDialogLoading();
                 }
 
             }
@@ -297,7 +297,7 @@ public final class FragmentHome extends BaseFragment <FragmentHomeBinding> imple
             public void onHttpsError(ANError anError) {
 
                 Toast.makeText(getContext(), "Error on : "+anError.getErrorBody(), Toast.LENGTH_SHORT).show();
-                DialogsKt.dialogProgrees.dismiss();
+                DialogsKt.dismissDialogLoading();
             }
         });
     }
@@ -308,7 +308,7 @@ public final class FragmentHome extends BaseFragment <FragmentHomeBinding> imple
         getBinding().rvKomikChina.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         getBinding().rvKomikChina.setAdapter(adapterKomik);
 
-        DialogsKt.dialogProgrees.dismiss();
+        DialogsKt.dismissDialogLoading();
     }
 
     @Override

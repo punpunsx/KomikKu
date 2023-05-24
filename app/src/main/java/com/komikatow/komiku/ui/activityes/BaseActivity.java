@@ -1,4 +1,4 @@
-package com.komikatow.komiku.ui.activity;
+package com.komikatow.komiku.ui.activityes;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
