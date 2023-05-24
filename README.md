@@ -25,5 +25,5 @@ Install my-project with android studio
   - paste urL project ini / buka from directory dan navigasikan ke projek ini 
 ```
     
-## 🛠 Skills
-Java, Kotlin
+## 🛠 Skill
+Java
