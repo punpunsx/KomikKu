@@ -14,7 +14,7 @@ App ini masih dalam tahap pengembangan
 
 
 ## 🚀 Tentang saya
-Saat ini saya sedang belajar mengembangkan app menggunakan android studio dengan bahasa Java dan kotlin, pada saat aplikasi ini dibuat umur saya masih 17 Tahun.
+Saat ini saya sedang belajar mengembangkan app menggunakan android studio dengan bahasa Java dan kotlin.
 
 
 ## Installation
