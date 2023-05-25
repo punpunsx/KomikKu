@@ -22,12 +22,11 @@ import com.komikatow.komiku.utils.onDialogListener;
 
 import java.util.List;
 
-public final class FragmentFavorite extends BaseFragment <FragmentFavoriteBinding> implements onDialogListener {
+public final class FragmentFavorite extends BaseFragment <FragmentFavoriteBinding>  {
 
     private FavoriteDbApp database;
     private List<FavoriteEnity> allData;
     private AdapterFavorite adapterFavorite;
-    private int position;
 
     @Override
     protected FragmentFavoriteBinding createBinding(LayoutInflater inflater, ViewGroup container) {
@@ -59,10 +58,24 @@ public final class FragmentFavorite extends BaseFragment <FragmentFavoriteBindin
                 }
 
                 @Override
-                public boolean onLongClickListener(int pos) {
+                public boolean onLongClickListener(int position) {
 
-                    position = pos;
-                    DialogsKt.setAlertDialog(requireContext(), "Hapus", "Hapus komik : "+allData.get(pos).getTitle() + " Dari favoritre", false, FragmentFavorite.this);
+                    DialogsKt.setAlertDialog(requireContext(), "Hapus", "Hapus komik : " + allData.get(position).getTitle() + " Dari favoritre", false, new onDialogListener() {
+                        @SuppressLint("NotifyDataSetChanged")
+                        @Override
+                        public void onOkeButton() {
+
+                            new Thread(() -> database.dao().deleteData(new FavoriteEnity(allData.get(position).getEndpoint(), allData.get(position).getThumbnail(), allData.get(position).getThumbnail()))).start();
+                            allData.remove(position);
+                            adapterFavorite.notifyDataSetChanged();
+
+                        }
+
+                        @Override
+                        public void onCencleButton() {
+
+                        }
+                    });
                     DialogsKt.showAlertDialog();
                     return true;
                 }
@@ -78,17 +91,4 @@ public final class FragmentFavorite extends BaseFragment <FragmentFavoriteBindin
 
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    @Override
-    public void onOkeButton() {
-
-        new Thread(() -> database.dao().deleteData(new FavoriteEnity(allData.get(position).getEndpoint(), allData.get(position).getThumbnail(), allData.get(position).getThumbnail()))).start();
-        allData.remove(position);
-        adapterFavorite.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onCencleButton() {
-
-    }
 }

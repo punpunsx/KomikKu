@@ -6,7 +6,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class FavoriteEnity {
+public final class FavoriteEnity {
 
     @PrimaryKey
     @NonNull

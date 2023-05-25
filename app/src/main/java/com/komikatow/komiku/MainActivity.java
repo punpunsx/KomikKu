@@ -16,7 +16,6 @@ import com.komikatow.komiku.ui.activityes.BaseActivity;
 import com.komikatow.komiku.ui.fragments.FragmentFavorite;
 import com.komikatow.komiku.ui.fragments.FragmentHome;
 import com.komikatow.komiku.ui.fragments.FragmentRiwayat;
-import com.komikatow.komiku.ui.fragments.FragmentUpdate;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -70,9 +69,6 @@ public final class MainActivity extends BaseActivity <ActivityMainBinding> imple
 
         if (item.getItemId() == R.id.action_home){
             setFrament(new FragmentHome());
-
-        } else if (item.getItemId() ==  R.id.action_update) {
-            setFrament(new FragmentUpdate());
 
         } else if (item.getItemId() ==  R.id.action_fav) {
             setFrament(new FragmentFavorite());

@@ -18,9 +18,10 @@ import com.komikatow.komiku.R;
 import com.komikatow.komiku.adapter.AdapterChapter;
 import com.komikatow.komiku.adapter.AdapterGenre;
 import com.komikatow.komiku.databinding.ActivityDetailBinding;
-import com.komikatow.komiku.model.ModelChapter;
+import com.komikatow.komiku.room.enity.ModelChapter;
 import com.komikatow.komiku.model.ModelGenre;
 import com.komikatow.komiku.room.dbApp.FavoriteDbApp;
+import com.komikatow.komiku.room.dbApp.HistoryDbApp;
 import com.komikatow.komiku.room.enity.FavoriteEnity;
 import com.komikatow.komiku.utils.DialogsKt;
 import com.komikatow.komiku.utils.Endpoints;
@@ -36,12 +37,12 @@ import java.util.List;
 
 public final class DetailActivity extends BaseActivity <ActivityDetailBinding> implements ItemRecyclerClick {
     private final List < ModelGenre < String > > listGenre = new ArrayList<>();
-    private final List < ModelChapter < String > > listChapter = new ArrayList<>();
-
+    private final List < ModelChapter > listChapter = new ArrayList<>();
 
     //variabel untuk diset ke db
     private String titleKomik;
     private String thumbnail;
+    private String chapterName;
     private String waktu;
     private String endpointDetail;
 
@@ -159,9 +160,11 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
         JSONArray jsonArray = jsonObject.getJSONArray("chapters");
         for (int i = 0; i < jsonArray.length(); i++) {
 
-            ModelChapter < String > modelChapter = new ModelChapter<>();
+            ModelChapter modelChapter = new ModelChapter();
             JSONObject jsonCh = jsonArray.getJSONObject(i);
-            modelChapter.setNemeCh(jsonCh.getString("name"));
+
+            chapterName  = jsonCh.getString("name");
+            modelChapter.setNemeCh(chapterName);
 
             JSONObject link = jsonCh.getJSONObject("link");
             modelChapter.setEndPointCh(link.getString("endpoint"));
@@ -178,7 +181,7 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
     }
 
     @SuppressLint("SetTextI18n")
-    private void adapterChapter(List<ModelChapter<String>> listChapter) {
+    private void adapterChapter(List<ModelChapter> listChapter) {
 
         AdapterChapter adapterChapter = new AdapterChapter(this, this, listChapter,this);
         getBinding().rvChapter.setLayoutManager(new GridLayoutManager(this, 4));
@@ -187,8 +190,37 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
         getBinding().tvTotalCh.setText("Total Chapter : "+ adapterChapter.getItemCount());
     }
 
+    //Ketika item dari chapter di klik
     @Override
     public void onClickListener(int pos) {
+
+        validasiDataFromRiwayatDatabase(pos);
+    }
+
+    //Melakukan pengecekan apakah data dari komik yg dihalaman ini sudah ada / belum pada database room
+    private void validasiDataFromRiwayatDatabase(int position){
+
+        HistoryDbApp database = HistoryDbApp.getInstance(getApplicationContext());
+        ModelChapter data = new ModelChapter(endpointDetail, waktu, titleKomik, chapterName, thumbnail);
+
+        new Thread(() -> {
+
+            //Data udah ada
+            if (database.dao().checkIfExist(endpointDetail)){
+
+                database.dao().updade(data);
+                runOnUiThread(()-> toReadActivity(position));
+
+            }else {
+                //Data belum ada
+                database.dao().insert(data);
+                runOnUiThread(()-> toReadActivity(position));
+
+            }
+        }).start();
+    }
+
+    private void toReadActivity(int pos){
 
         Intent intent = new Intent(getApplicationContext(), BacaActivitty.class);
         intent.putExtra("endpoint",listChapter.get(pos).getEndPointCh());
@@ -198,6 +230,8 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
 
     }
 
+
+    //Melakukan pengecekan apakah data dari komik yg dihalaman ini sudah ada / belum pada database room
     private void validasiDataFromFavoriteDatabase(){
 
 

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.komikatow.komiku.R;
 import com.komikatow.komiku.databinding.ItemChapterBinding;
-import com.komikatow.komiku.model.ModelChapter;
+import com.komikatow.komiku.room.enity.ModelChapter;
 import com.komikatow.komiku.utils.ItemRecyclerClick;
 
 import java.util.List;
@@ -21,10 +21,10 @@ public class AdapterChapter extends RecyclerView.Adapter<AdapterChapter.ChapterH
     private final Context context;
     private final Activity activity;
     private final ItemRecyclerClick listener;
-    private final List <ModelChapter < String > > list;
+    private final List <ModelChapter > list;
 
 
-    public AdapterChapter(Context context,Activity activity, List<ModelChapter<String>> list, ItemRecyclerClick listener) {
+    public AdapterChapter(Context context,Activity activity, List<ModelChapter> list, ItemRecyclerClick listener) {
         this.context = context;
         this.list = list;
         this.activity = activity;
