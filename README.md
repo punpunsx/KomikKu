@@ -20,8 +20,7 @@ Jika app tidak berfungsi mungkin api yg digunakan oleh app ini sudah mati
 
 
 
-## 🚀 Tentang saya
-Saat ini saya sedang belajar mengembangkan app menggunakan android studio dengan bahasa Java dan kotlin, pada saat app ini dibuat umur saya 17 tahun.
+
 
 
 ## Installation
@@ -32,6 +31,11 @@ Install my-project with android studio
   - Buka android studio, kemudian pilih Get from VCS
   - paste urL project ini / buka from directory dan navigasikan ke projek ini 
 ```
+
+## 🚀 Tentang saya
+
+Saat ini saya sedang belajar mengembangkan app menggunakan android studio dengan bahasa Java dan kotlin, pada saat app ini dibuat umur saya 17 tahun.
+
     
 ## 🛠 Skill
 Java.
