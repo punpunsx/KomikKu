@@ -57,15 +57,4 @@ public final class TestAllClass {
         MainActivity.getTimeInLocale();
         System.out.println(MainActivity.hasilDate);
     }
-
-    @Test
-    public void testMandi() {
-
-        boolean sudahMandi = false;
-        String  name = "Fajar";
-
-        if (!sudahMandi){
-            System.out.println( name+ " belum mandi");
-        }
-    }
 }
