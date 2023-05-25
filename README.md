@@ -2,8 +2,7 @@
 # KomikU Apps
 
 Data dari app ini diambil dari Api https://github.com/KatowProject/komikato_py,
-Jika app tidak berfungsi mungkin api yg digunakan oleh app ini sudah mati,
-App ini masih dalam tahap pengembangan
+Jika app tidak berfungsi mungkin api yg digunakan oleh app ini sudah mati
 
 ## Authors 
 
@@ -14,7 +13,7 @@ App ini masih dalam tahap pengembangan
 
 
 ## 🚀 Tentang saya
-Saat ini saya sedang belajar mengembangkan app menggunakan android studio dengan bahasa Java dan kotlin.
+Saat ini saya sedang belajar mengembangkan app menggunakan android studio dengan bahasa Java dan kotlin
 
 
 ## Installation
@@ -26,5 +25,10 @@ Install my-project with android studio
   - paste urL project ini / buka from directory dan navigasikan ke projek ini 
 ```
     
-## 🛠 Skill
-Java
+## 🛠 Skills
+Java, Kotlin
+
+## Screenshots
+
+![App Screenshot](C:\Users\Ridh\Pictures\Screenshots)
+
