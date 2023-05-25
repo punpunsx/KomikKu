@@ -45,5 +45,9 @@ Java.
 ![Fragment Pengaturan](app/src/main/res/drawable/pengaturan.png)
 ### Bagian Fragment Pegaturan
 
+![Detail Activity](app/src/main/res/drawable/halamanDetail.png)
+### Bagian Halaman Detail Komik
 
+![Baca Activity](app/src/main/res/drawable/halamanBaca.png)
+### Bagian Halaman Baca Komik
 
