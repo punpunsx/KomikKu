@@ -20,6 +20,8 @@ import com.komikatow.komiku.adapter.AdapterGenre;
 import com.komikatow.komiku.databinding.ActivityDetailBinding;
 import com.komikatow.komiku.model.ModelChapter;
 import com.komikatow.komiku.model.ModelGenre;
+import com.komikatow.komiku.room.dbApp.FavoriteDbApp;
+import com.komikatow.komiku.room.enity.FavoriteEnity;
 import com.komikatow.komiku.utils.DialogsKt;
 import com.komikatow.komiku.utils.Endpoints;
 import com.komikatow.komiku.utils.ItemRecyclerClick;
@@ -90,13 +92,17 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
                     getBinding().tvRating.setRating(Float.parseFloat(jsonObject.getString("score").trim()));
 
                     if (type != null && !type.isEmpty()){
+                        getBinding().tvType.setVisibility(View.VISIBLE);
                         getBinding().tvType.setText("Type : "+getIntent().getStringExtra("type"));
+
                     } else{
                         getBinding().tvType.setVisibility(View.GONE);
                     }
 
                     getResponseGenre(jsonObject);
                     getResponseChapters(jsonObject);
+
+                    validasiDataFromFavoriteDatabase();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -189,6 +195,49 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
         intent.putExtra("number", listChapter.get(pos).getNemeCh());
 
         startActivity(intent);
+
+    }
+
+    private void validasiDataFromFavoriteDatabase(){
+
+
+        FavoriteEnity data = new FavoriteEnity(endpointDetail, titleKomik, thumbnail);
+        FavoriteDbApp database = FavoriteDbApp.getInstance(this);
+
+
+        new Thread(() -> {
+
+            if (database.dao().checkIfExist(endpointDetail)){
+                //Data sudah ada
+                runOnUiThread(() -> getBinding().fabAdd.setEnabled(false));
+
+            }else {
+                //Data belum ada
+                runOnUiThread(() -> getBinding().fabAdd.setEnabled(true));
+                getBinding().fabAdd.setOnClickListener(v-> {
+                    new Thread(() -> database.dao().insertData(data)).start();
+                    runOnUiThread(() -> {
+                        getBinding().fabAdd.setEnabled(false);
+                        Toast.makeText(DetailActivity.this, "Berhasil menambahkan data ke favorite", Toast.LENGTH_SHORT).show();
+                    });
+                });
+
+            }
+
+
+        }).start();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (endpointDetail != null && !endpointDetail.isEmpty()){
+            getBinding().fabAdd.setEnabled(true);
+        }else{
+            getBinding().fabAdd.setEnabled(false);
+        }
 
     }
 }
