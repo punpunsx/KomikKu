@@ -25,10 +25,16 @@ Install my-project with android studio
   - paste urL project ini / buka from directory dan navigasikan ke projek ini 
 ```
     
-## 🛠 Skills
-Java, Kotlin
+## 🛠 Skill
+Java.
 
 ## Screenshots
 
-![App Screenshot](C:\Users\Ridh\Pictures\Screenshots)
+![Fragment Home Atas](/app/src/main/res/drawable/homeAtas.png)
+![Fragment Home Bawah](/app/src/main/res/drawable/homeBawah.png)
+![Fragment Favorite](app/src/main/res/drawable/favorite.png)
+![Fragment Riwayat](app/src/main/res/drawable/Riwayat.png)
+![Fragment Pengaturan](app/src/main/res/drawable/pengaturan.png)
+
+
 
