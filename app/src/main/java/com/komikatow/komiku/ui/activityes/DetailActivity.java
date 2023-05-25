@@ -162,7 +162,7 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
 
             ModelChapter modelChapter = new ModelChapter();
             JSONObject jsonCh = jsonArray.getJSONObject(i);
-            modelChapter.setNemeCh(jsonCh.getString("name"));
+            modelChapter.setNemeCh(jsonCh.getString("name").replace("\n", " "));
 
             JSONObject link = jsonCh.getJSONObject("link");
             modelChapter.setEndPointCh(link.getString("endpoint"));

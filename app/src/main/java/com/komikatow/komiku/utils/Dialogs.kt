@@ -9,7 +9,7 @@ private lateinit var dialogProgrees:ProgressDialog
 private lateinit var alertDialog:MaterialAlertDialogBuilder
 lateinit var dialogProgressCustum:BlackProgressDialog
 
-interface onDialogListener{
+interface OnDialogListener{
     fun onOkeButton()
     fun onCencleButton()
 
@@ -34,7 +34,7 @@ fun setDialogLoadingCustum(context: Context, msg:String){
 
 }
 
-fun setAlertDialog(context: Context, title: String, msg: String, canclelable: Boolean, listener: onDialogListener) {
+fun setAlertDialog(context: Context, title: String, msg: String, canclelable: Boolean, listener: OnDialogListener) {
     alertDialog = MaterialAlertDialogBuilder(context)
     alertDialog.setTitle(title)
     alertDialog.setMessage(msg)

@@ -52,7 +52,9 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.RiwayatH
         binding.itemTitle.setText(list.get(position).getNameKomik());
         binding.itemChapter.setText(list.get(position).getNemeCh());
         binding.itemDate.setText(list.get(position).getDate());
+
         holder.itemView.setOnClickListener(v -> listener.onClickListener(position));
+        holder.itemView.setOnLongClickListener(v-> listener.onLongClickListener(position));
 
     }
 

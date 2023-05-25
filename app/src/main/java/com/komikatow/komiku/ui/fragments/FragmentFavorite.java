@@ -18,7 +18,7 @@ import com.komikatow.komiku.room.enity.FavoriteEnity;
 import com.komikatow.komiku.ui.activityes.DetailActivity;
 import com.komikatow.komiku.utils.DialogsKt;
 import com.komikatow.komiku.utils.ItemRecyclerClick;
-import com.komikatow.komiku.utils.onDialogListener;
+import com.komikatow.komiku.utils.OnDialogListener;
 
 import java.util.List;
 
@@ -60,7 +60,7 @@ public final class FragmentFavorite extends BaseFragment <FragmentFavoriteBindin
                 @Override
                 public boolean onLongClickListener(int position) {
 
-                    DialogsKt.setAlertDialog(requireContext(), "Hapus", "Hapus komik : " + allData.get(position).getTitle() + " Dari favoritre", false, new onDialogListener() {
+                    DialogsKt.setAlertDialog(requireContext(), "Hapus", "Hapus komik : " + allData.get(position).getTitle() + " Dari favoritre", false, new OnDialogListener() {
                         @SuppressLint("NotifyDataSetChanged")
                         @Override
                         public void onOkeButton() {

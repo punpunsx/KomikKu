@@ -15,7 +15,9 @@ import com.komikatow.komiku.databinding.FragmentRiwayatBinding;
 import com.komikatow.komiku.room.dbApp.HistoryDbApp;
 import com.komikatow.komiku.room.enity.ModelChapter;
 import com.komikatow.komiku.ui.activityes.DetailActivity;
+import com.komikatow.komiku.utils.DialogsKt;
 import com.komikatow.komiku.utils.ItemRecyclerClick;
+import com.komikatow.komiku.utils.OnDialogListener;
 
 import java.util.List;
 
@@ -23,6 +25,7 @@ public final class FragmentRiwayat extends BaseFragment <FragmentRiwayatBinding>
 
     private HistoryDbApp historyDbApp;
     private List<ModelChapter > data;
+    private ModelChapter enityChapter;
     private AdapterRiwayat adapterRiwayat;
 
     @Override
@@ -62,4 +65,32 @@ public final class FragmentRiwayat extends BaseFragment <FragmentRiwayatBinding>
         startActivity(intent);
 
     }
+
+    @Override
+    public boolean onLongClickListener(int pos) {
+
+        DialogsKt.setAlertDialog(requireContext(), "Hapus...", "Hapus " + data.get(pos).getNameKomik() + " Dari riwayat baca", false, new OnDialogListener() {
+            @Override
+            public void onOkeButton() {
+
+                new Thread(() -> {
+                    enityChapter = new ModelChapter(data.get(pos).getEndPointDetail(), data.get(pos).getDate(), data.get(pos).getNameKomik(), data.get(pos).getNemeCh(), data.get(pos).getThumbnail());
+                    historyDbApp.dao().delete(enityChapter);
+                    data.remove(pos);
+
+                }).start();
+
+                adapterRiwayat.notifyItemRemoved(pos);
+
+            }
+
+            @Override
+            public void onCencleButton() {
+
+            }
+        });
+        DialogsKt.showAlertDialog();
+        return true;
+    }
+
 }
