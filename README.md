@@ -31,10 +31,19 @@ Java.
 ## Screenshots
 
 ![Fragment Home Atas](/app/src/main/res/drawable/homeAtas.png)
+### Bagian Fragment Home Atas
+
 ![Fragment Home Bawah](/app/src/main/res/drawable/homeBawah.png)
+### Bagian Fragment Home Bawah
+
 ![Fragment Favorite](app/src/main/res/drawable/favorite.png)
+### Bagian Fragment Favorite
+
 ![Fragment Riwayat](app/src/main/res/drawable/Riwayat.png)
+### Bagian Fragment Riwayat 
+
 ![Fragment Pengaturan](app/src/main/res/drawable/pengaturan.png)
+### Bagian Fragment Pegaturan
 
 
 
