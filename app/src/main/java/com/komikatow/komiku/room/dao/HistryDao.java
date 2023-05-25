@@ -20,9 +20,6 @@ public interface HistryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(ModelChapter modelChapter);
 
-    @Update(entity = ModelChapter.class)
-    void updade(ModelChapter modelChapter );
-
     @Delete(entity = ModelChapter.class)
     void delete(ModelChapter  modelChapter);
 

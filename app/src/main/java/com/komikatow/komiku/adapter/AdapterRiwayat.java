@@ -13,6 +13,7 @@ import com.bumptech.glide.request.target.Target;
 import com.komikatow.komiku.R;
 import com.komikatow.komiku.databinding.ItemHistoryBinding;
 import com.komikatow.komiku.room.enity.ModelChapter;
+import com.komikatow.komiku.utils.ItemRecyclerClick;
 
 import java.util.List;
 
@@ -21,10 +22,12 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.RiwayatH
     private ItemHistoryBinding binding;
     private final Context context;
     private final List<ModelChapter> list;
+    private final ItemRecyclerClick listener;
 
-    public AdapterRiwayat(Context context, List<ModelChapter> list) {
+    public AdapterRiwayat(Context context, List<ModelChapter> list, ItemRecyclerClick listener) {
         this.context = context;
         this.list = list;
+        this.listener = listener;
     }
 
     @NonNull
@@ -49,6 +52,7 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.RiwayatH
         binding.itemTitle.setText(list.get(position).getNameKomik());
         binding.itemChapter.setText(list.get(position).getNemeCh());
         binding.itemDate.setText(list.get(position).getDate());
+        holder.itemView.setOnClickListener(v -> listener.onClickListener(position));
 
     }
 

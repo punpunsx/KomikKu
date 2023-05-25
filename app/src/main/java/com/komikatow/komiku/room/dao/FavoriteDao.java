@@ -20,7 +20,7 @@ public interface FavoriteDao {
     void insertData(FavoriteEnity favoriteEnity);
 
     @Delete(entity = FavoriteEnity.class)
-    void deleteData(FavoriteEnity favoriteEnity);
+    void deleteData(FavoriteEnity enity);
 
     @Query("SELECT EXISTS (SELECT 1 FROM favoriteenity WHERE Endpoint = :endpoint)")
     boolean checkIfExist(String endpoint);

@@ -162,9 +162,7 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
 
             ModelChapter modelChapter = new ModelChapter();
             JSONObject jsonCh = jsonArray.getJSONObject(i);
-
-            chapterName  = jsonCh.getString("name");
-            modelChapter.setNemeCh(chapterName);
+            modelChapter.setNemeCh(jsonCh.getString("name"));
 
             JSONObject link = jsonCh.getJSONObject("link");
             modelChapter.setEndPointCh(link.getString("endpoint"));
@@ -194,6 +192,7 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
     @Override
     public void onClickListener(int pos) {
 
+        chapterName = listChapter.get(pos).getNemeCh();
         validasiDataFromRiwayatDatabase(pos);
     }
 
@@ -208,7 +207,8 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
             //Data udah ada
             if (database.dao().checkIfExist(endpointDetail)){
 
-                database.dao().updade(data);
+                database.dao().delete(data);
+                database.dao().insert(data);
                 runOnUiThread(()-> toReadActivity(position));
 
             }else {

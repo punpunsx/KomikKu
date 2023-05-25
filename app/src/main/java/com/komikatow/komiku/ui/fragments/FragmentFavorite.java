@@ -65,9 +65,11 @@ public final class FragmentFavorite extends BaseFragment <FragmentFavoriteBindin
                         @Override
                         public void onOkeButton() {
 
-                            new Thread(() -> database.dao().deleteData(new FavoriteEnity(allData.get(position).getEndpoint(), allData.get(position).getThumbnail(), allData.get(position).getThumbnail()))).start();
-                            allData.remove(position);
-                            adapterFavorite.notifyDataSetChanged();
+                            new Thread(() ->{
+                                database.dao().deleteData(new FavoriteEnity(allData.get(position).getEndpoint(), allData.get(position).getTitle(), allData.get(position).getThumbnail()));
+                                allData.remove(position);
+                            }).start();
+                            adapterFavorite.notifyItemRemoved(position);
 
                         }
 
