@@ -34,6 +34,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+// maaf jika di file / fragment ini banyak code duplication.
 public final class FragmentHome extends BaseFragment <FragmentHomeBinding> implements ItemRecyclerClick {
     private final List < ModelBaseKomik < String > > listKomikJepang = new ArrayList<>();
     private final List < ModelBaseKomik < String > > listRelease = new ArrayList<>();
