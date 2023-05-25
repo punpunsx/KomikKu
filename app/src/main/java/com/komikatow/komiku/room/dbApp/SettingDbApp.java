@@ -13,7 +13,7 @@ import com.komikatow.komiku.room.enity.SettingEnity;
 public abstract class SettingDbApp extends RoomDatabase {
 
     private static SettingDbApp INSTACE;
-    public abstract SettingDao<SettingEnity> dao();
+    public abstract SettingDao dao();
 
     public static synchronized SettingDbApp  getInstance(Context context){
 

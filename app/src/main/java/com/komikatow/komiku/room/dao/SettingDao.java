@@ -9,18 +9,18 @@ import com.komikatow.komiku.room.enity.SettingEnity;
 import java.util.List;
 
 @Dao
-public interface SettingDao <T>{
+public interface SettingDao {
 
     @Query("SELECT * FROM settingenity")
-    List<SettingEnity <T> > getAll();
+    List<SettingEnity > getAll();
 
     @Insert(entity = SettingEnity.class)
-    void insert(SettingEnity <T> enity);
+    void insert(SettingEnity enity);
 
     @Insert(entity = SettingEnity.class)
-    void delete(SettingEnity <T> enity);
+    void delete(SettingEnity  enity);
 
     @Query("SELECT * FROM settingenity WHERE uid = :id")
-    SettingEnity<T> getById(int id);
+    SettingEnity getById(int id);
 
 }

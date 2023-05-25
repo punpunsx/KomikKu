@@ -6,84 +6,84 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class SettingEnity <T> {
+public class SettingEnity  {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    private T uid;
+    private int uid;
 
     @ColumnInfo(name = "image Quality")
-    private int quality;
+    private boolean quality;
 
     @ColumnInfo(name = "cache foto")
-    private T cache;
+    private boolean cache;
 
     @ColumnInfo(name = "animasi Detail")
-    private T animasiDetail;
+    private boolean animasiDetail;
 
     @ColumnInfo(name = "animasi Transisi")
-    private T transisi;
+    private boolean transisi;
 
     @ColumnInfo(name = "bahasa aplikasi")
-    private T bahasa;
+    private boolean bahasa;
 
     @ColumnInfo(name = "app Version")
-    private T version;
+    private boolean version;
 
     @NonNull
-    public T getUid() {
+    public int getUid() {
         return uid;
     }
 
-    public void setUid(@NonNull T uid) {
+    public void setUid(@NonNull int uid) {
         this.uid = uid;
     }
 
-    public int getQuality() {
+    public boolean getQuality() {
         return quality;
     }
 
-    public void setQuality(int quality) {
+    public void setQuality(boolean quality) {
         this.quality = quality;
     }
 
-    public T getCache() {
+    public boolean getCache() {
         return cache;
     }
 
-    public void setCache(T cache) {
+    public void setCache(boolean cache) {
         this.cache = cache;
     }
 
-    public T getAnimasiDetail() {
+    public boolean getAnimasiDetail() {
         return animasiDetail;
     }
 
-    public void setAnimasiDetail(T animasiDetail) {
+    public void setAnimasiDetail(boolean animasiDetail) {
         this.animasiDetail = animasiDetail;
     }
 
-    public T getTransisi() {
+    public boolean getTransisi() {
         return transisi;
     }
 
-    public void setTransisi(T transisi) {
+    public void setTransisi(boolean transisi) {
         this.transisi = transisi;
     }
 
-    public T getBahasa() {
+    public boolean getBahasa() {
         return bahasa;
     }
 
-    public void setBahasa(T bahasa) {
+    public void setBahasa(boolean bahasa) {
         this.bahasa = bahasa;
     }
 
-    public T getVersion() {
+    public boolean getVersion() {
         return version;
     }
 
-    public void setVersion(T version) {
+    public void setVersion(boolean version) {
         this.version = version;
     }
 }
