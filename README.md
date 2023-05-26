@@ -12,7 +12,7 @@ Jika app tidak berfungsi mungkin api yg digunakan oleh app ini sudah mati
 - Pencarian Komik 
 - Genre yang lengkap
 - History baca
-- Simpat komik untuk dibaca nanti
+- Simpan komik untuk dibaca nanti
 
 ## Authors 
 
