@@ -24,4 +24,14 @@
         android:layout_below="@id/appbar"
         android:id="@+id/rvFav"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:text=" Anda belum menambahkan komik favorite, silahkan klik icon favorie pada detail komik untuk menyimpan data\n Untuk menghapus data silahkan tekan komik yg ingin dihapus datanya"
+        android:drawableStart="@drawable/baseline_info_24"
+        android:id="@+id/itemNull"/>
+
 </RelativeLayout>

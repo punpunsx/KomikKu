@@ -53,6 +53,13 @@ public final class FragmentRiwayat extends BaseFragment <FragmentRiwayatBinding>
                 getBinding().rvHistory.setAdapter(adapterRiwayat);
             });
 
+            if (data.isEmpty()){
+                requireActivity().runOnUiThread(()-> getBinding().itemNull.setVisibility(View.VISIBLE));
+
+            }else {
+                requireActivity().runOnUiThread(()-> getBinding().itemNull.setVisibility(View.GONE));
+            }
+
         }).start();
 
     }

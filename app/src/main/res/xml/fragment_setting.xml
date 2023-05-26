@@ -8,8 +8,18 @@
             app:title="Image Quality"
             android:icon="@drawable/baseline_high_quality_24"
             android:enabled="false"
+            android:defaultValue="true"
             android:summary="Selalu tampilkan qualitas terbaik"
             app:key="quality"/>
+
+        <SwitchPreference
+            app:title="Cache"
+            android:defaultValue="true"
+            android:enabled="false"
+            android:icon="@drawable/baseline_cached_24"
+            android:summary="Selalu simpan gambar pada cache\nJika diaktifkan maka ini akan menyimpan gambar pada cache aplikasi\nsehingga ketika lain waktu ditampilkan lagi ini tidak akan menggunakan data / wifi"
+            app:key="cache"
+            />
 
         <SwitchPreference
             app:title="Mode Baca"
@@ -17,13 +27,6 @@
             android:icon="@drawable/baseline_menu_book_24"
             app:key="mode"/>
 
-        <SwitchPreference
-            app:title="Cache"
-            android:defaultValue="true"
-            android:icon="@drawable/baseline_cached_24"
-            android:summary="Selalu simpan gambar pada cache\nJika diaktifkan maka ini akan menyimpan gambar pada cache aplikasi\nsehingga ketika lain waktu ditampilkan lagi ini tidak akan menggunakan data / wifi"
-            app:key="cache"
-            />
 
         <SwitchPreference
             app:title="Animasi Detail"
@@ -43,8 +46,10 @@
 
     <PreferenceCategory app:title="Bahasa">
 
-        <Preference app:title="Bahasa aplikasi"
-            android:summary="Pilih bahasa aplikasi antara bahasa Inggris dengan Indonesia"
+        <SwitchPreference app:title="Bahasa aplikasi"
+            android:summary="Saat ini : Indonesia"
+            android:enabled="false"
+            android:defaultValue="true"
             android:icon="@drawable/baseline_language_24"
             app:key="bahasa"/>
 
