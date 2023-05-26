@@ -1,5 +1,6 @@
 package com.komikatow.komiku.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.RiwayatH
         return new RiwayatHolder(binding);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull RiwayatHolder holder, int position) {
 
@@ -51,7 +53,7 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.RiwayatH
 
         binding.itemTitle.setText(list.get(position).getNameKomik());
         binding.itemChapter.setText(list.get(position).getNemeCh());
-        binding.itemDate.setText(list.get(position).getDate());
+        binding.itemDate.setText("Waktu : "+list.get(position).getDate());
 
         holder.itemView.setOnClickListener(v -> listener.onClickListener(position));
         holder.itemView.setOnLongClickListener(v-> listener.onLongClickListener(position));

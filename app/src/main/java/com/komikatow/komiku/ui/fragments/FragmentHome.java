@@ -131,7 +131,10 @@ public final class FragmentHome extends BaseFragment <FragmentHomeBinding> imple
                         modelGenre.setEndpointgenre(link.getString("endpoint"));
                         listGenre.add(modelGenre);
                     }
-                    adapterListGenre(listGenre);
+                    if (isAdded()){
+                        adapterListGenre(listGenre);
+                    }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
