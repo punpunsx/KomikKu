@@ -3,7 +3,6 @@ package com.komikatow.komiku.ui.fragments;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -16,9 +15,9 @@ import com.komikatow.komiku.room.enity.SettingEnity;
 
 public final class FragmentSetting extends PreferenceFragmentCompat {
     private SettingDbApp settingDbApp;
-    private SwitchPreference quality, cache, animasiDetail, animasiTransisi;
+    private SwitchPreference quality, mode, cache, animasiDetail, animasiTransisi;
     private Preference bahasa, version, teknologi, developer;
-    boolean isQualityOn, isCacheOn, isAnimasiDetailOn, isAnimasiTransisiOn;
+    boolean isQualityOn, isCacheOn, isModeScrool, isAnimasiDetailOn, isAnimasiTransisiOn;
 
     @Override
     public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
@@ -26,6 +25,7 @@ public final class FragmentSetting extends PreferenceFragmentCompat {
 
         settingDbApp = SettingDbApp.getInstance(getContext());
         quality = findPreference("quality");
+        mode = findPreference("mode");
         cache = findPreference("cache");
         animasiDetail = findPreference("animasiGambar");
         animasiTransisi = findPreference("animasiTransisi");
@@ -37,6 +37,7 @@ public final class FragmentSetting extends PreferenceFragmentCompat {
 
         final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
         isQualityOn = sharedPreferences.getBoolean("quality", false);
+        isModeScrool  = sharedPreferences.getBoolean("mode", false);
         isCacheOn = sharedPreferences.getBoolean("cache", false);
         isAnimasiDetailOn = sharedPreferences.getBoolean("animasiGambar", false);
         isAnimasiTransisiOn = sharedPreferences.getBoolean("animasiTransisi", false);
@@ -55,6 +56,25 @@ public final class FragmentSetting extends PreferenceFragmentCompat {
                 settingDbApp.dao().insert(settingEnity);
 
             }).start();
+
+            return true;
+        });
+
+        mode.setOnPreferenceChangeListener((preference, newValue) -> {
+            isModeScrool = (boolean) newValue;
+            new Thread(() -> {
+
+                SettingEnity settingEnity = new SettingEnity();
+                settingEnity.setMode(isModeScrool);
+                settingDbApp.dao().insert(settingEnity);
+
+            }).start();
+
+            if (isModeScrool){
+                mode.setSummary("Mode saat ini : Scrool");
+            }else {
+                mode.setSummary("Mode saat ini : Slide");
+            }
 
             return true;
         });

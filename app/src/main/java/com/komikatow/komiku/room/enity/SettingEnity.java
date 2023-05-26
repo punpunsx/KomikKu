@@ -15,6 +15,9 @@ public class SettingEnity  {
     @ColumnInfo(name = "image Quality")
     private boolean quality;
 
+    @ColumnInfo(name = "mode baca")
+    private boolean mode;
+
     @ColumnInfo(name = "cache foto")
     private boolean cache;
 
@@ -45,6 +48,14 @@ public class SettingEnity  {
 
     public void setQuality(boolean quality) {
         this.quality = quality;
+    }
+
+    public boolean isMode() {
+        return mode;
+    }
+
+    public void setMode(boolean mode) {
+        this.mode = mode;
     }
 
     public boolean getCache() {

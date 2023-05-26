@@ -2,13 +2,19 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="Quality">
+    <PreferenceCategory app:title="Quality, dan Animasi">
 
         <SwitchPreference
             app:title="Image Quality"
             android:icon="@drawable/baseline_high_quality_24"
             android:summary="Selalu tampilkan qualitas terbaik"
             app:key="quality"/>
+
+        <SwitchPreference
+            app:title="Mode Baca"
+            app:summary=" "
+            android:icon="@drawable/baseline_menu_book_24"
+            app:key="mode"/>
 
         <SwitchPreference
             app:title="Cache"
