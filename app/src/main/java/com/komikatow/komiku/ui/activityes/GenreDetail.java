@@ -16,6 +16,7 @@ import com.komikatow.komiku.model.ModelBaseKomik;
 import com.komikatow.komiku.utils.DialogsKt;
 import com.komikatow.komiku.utils.Endpoints;
 import com.komikatow.komiku.utils.Networking;
+import com.komikatow.komiku.utils.NoInternet;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -146,5 +147,12 @@ public final class GenreDetail extends BaseActivity <ActivityGenreDetailBinding>
         if (isTransition){
             Animatoo.INSTANCE.animateSwipeRight(this);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        NoInternet.Companion.checkInternet(getLifecycle(), this);
     }
 }

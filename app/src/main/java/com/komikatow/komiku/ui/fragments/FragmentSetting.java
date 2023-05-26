@@ -45,7 +45,7 @@ public final class FragmentSetting extends PreferenceFragmentCompat {
         bug.setOnPreferenceClickListener(preference -> {
 
             Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse("https://api.whatsapp.com/send/?phone=0895323021645&text&type=phone_number&app_absent=0"));
+            intent.setData(Uri.parse("https://api.whatsapp.com/send/?phone=62895323021645&text&type=phone_number&app_absent=0"));
             startActivity(intent);
 
             return true;

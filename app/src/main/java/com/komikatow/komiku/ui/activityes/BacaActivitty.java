@@ -18,6 +18,7 @@ import com.komikatow.komiku.databinding.ActivityBacaBinding;
 import com.komikatow.komiku.model.ModelChapterDetail;
 import com.komikatow.komiku.utils.Endpoints;
 import com.komikatow.komiku.utils.Networking;
+import com.komikatow.komiku.utils.NoInternet;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -153,6 +154,7 @@ public final class BacaActivitty extends BaseActivity <ActivityBacaBinding>{
             getBinding().vPager.setOrientation(ViewPager2.ORIENTATION_VERTICAL);
         }
 
+        NoInternet.Companion.checkInternet(getLifecycle(), this);
     }
 
     @Override

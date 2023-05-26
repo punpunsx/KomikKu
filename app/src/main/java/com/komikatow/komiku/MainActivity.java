@@ -18,6 +18,7 @@ import com.komikatow.komiku.ui.fragments.FragmentFavorite;
 import com.komikatow.komiku.ui.fragments.FragmentHome;
 import com.komikatow.komiku.ui.fragments.FragmentRiwayat;
 import com.komikatow.komiku.ui.fragments.FragmentSetting;
+import com.komikatow.komiku.utils.NoInternet;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -108,16 +109,15 @@ public final class MainActivity extends BaseActivity <ActivityMainBinding> imple
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
-        int configNight = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_YES;
-        int configLight = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_NO;
+        getBinding().mainBottomBar.setSelectedItemId(R.id.action_home);
+        setFrament(new FragmentHome());
 
-        if (newConfig.uiMode == configNight){
-            getBinding().mainBottomBar.setSelectedItemId(R.id.action_home);
-            setFrament(new FragmentHome());
+    }
 
-        } else if (newConfig.uiMode == configLight) {
-            getBinding().mainBottomBar.setSelectedItemId(R.id.action_home);
-            setFrament(new FragmentHome());
-        }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        NoInternet.Companion.checkInternet(getLifecycle(), this);
     }
 }

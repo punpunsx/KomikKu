@@ -30,6 +30,7 @@ import com.komikatow.komiku.utils.DialogsKt;
 import com.komikatow.komiku.utils.Endpoints;
 import com.komikatow.komiku.utils.ItemRecyclerClick;
 import com.komikatow.komiku.utils.Networking;
+import com.komikatow.komiku.utils.NoInternet;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -301,6 +302,8 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
         }else {
             getBinding().detailImage.pause();
         }
+
+        NoInternet.Companion.checkInternet(getLifecycle(), this);
     }
 
     @Override
