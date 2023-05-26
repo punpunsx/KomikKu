@@ -1,6 +1,7 @@
 package com.komikatow.komiku.ui.fragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +10,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.androidnetworking.error.ANError;
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.komikatow.komiku.adapter.AdapterGenre;
 import com.komikatow.komiku.adapter.AdapterKomik;
 import com.komikatow.komiku.adapter.AdapterKomikJepang;
@@ -41,6 +44,7 @@ public final class FragmentHome extends BaseFragment <FragmentHomeBinding> imple
     private final List < ModelBaseKomik < String > > listKomikKorea = new ArrayList<>();
     private final List < ModelBaseKomik < String > > listKomikChina = new ArrayList<>();
     private final List < ModelGenre < String > > listGenre = new ArrayList<>();
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected FragmentHomeBinding createBinding(LayoutInflater inflater, ViewGroup container) {
@@ -54,6 +58,8 @@ public final class FragmentHome extends BaseFragment <FragmentHomeBinding> imple
         getBinding().btnSarch.setOnClickListener(v-> startActivity(new Intent(getContext(), SearchActivity.class)));
         DialogsKt.setDialogLoading(requireContext(), "Loading...", "Mohon tunggu sebentar", false);
         DialogsKt.showDialogLoading();
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 
         getResponseKomikJepang();
         getResponseGenreList();
@@ -321,7 +327,15 @@ public final class FragmentHome extends BaseFragment <FragmentHomeBinding> imple
         Intent intent = new Intent(getContext(), DetailActivity.class);
         intent.putExtra("endpoint", listKomikJepang.get(pos).getEndPoint());
         intent.putExtra("type", listKomikJepang.get(pos).getType());
-        startActivity(intent);
 
+
+        boolean transitionStaus = sharedPreferences.getBoolean("animasiTransisi", false);
+
+        if (transitionStaus){
+            startActivity(intent);
+            Animatoo.INSTANCE.animateZoom(requireContext());
+        }else {
+            startActivity(intent);
+        }
     }
 }

@@ -31,6 +31,7 @@
 
         <SwitchPreference
             app:title="Animasi transisi"
+            android:defaultValue="false"
             android:icon="@drawable/baseline_animation_24"
             android:summary="Selalu animasikan transisi antar halaman"
             app:key="animasiTransisi"/>

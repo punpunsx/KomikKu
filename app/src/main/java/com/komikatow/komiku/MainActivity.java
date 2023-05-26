@@ -1,5 +1,6 @@
 package com.komikatow.komiku;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -103,4 +104,20 @@ public final class MainActivity extends BaseActivity <ActivityMainBinding> imple
 
     }
 
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        int configNight = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_YES;
+        int configLight = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_NO;
+
+        if (newConfig.uiMode == configNight){
+            getBinding().mainBottomBar.setSelectedItemId(R.id.action_home);
+            setFrament(new FragmentHome());
+
+        } else if (newConfig.uiMode == configLight) {
+            getBinding().mainBottomBar.setSelectedItemId(R.id.action_home);
+            setFrament(new FragmentHome());
+        }
+    }
 }
