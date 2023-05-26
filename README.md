@@ -14,6 +14,10 @@ Jika app tidak berfungsi mungkin api yg digunakan oleh app ini sudah mati
 - History baca
 - Simpan komik untuk dibaca nanti
 
+# App Issue 
+- Biasanya / kebanyakan komik korea, dan china gambar terlalu kecil
+- jika app dijalankan di tab mungkin sebagian tampilan terlalu kecil
+
 ## Authors 
 
 - [@Ridho](https://github.com/Ridhoardhiansyah7/)
