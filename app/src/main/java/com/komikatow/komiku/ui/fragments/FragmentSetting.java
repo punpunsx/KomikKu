@@ -1,8 +1,10 @@
 package com.komikatow.komiku.ui.fragments;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -11,6 +13,7 @@ import androidx.preference.SwitchPreference;
 
 import com.komikatow.komiku.BuildConfig;
 import com.komikatow.komiku.R;
+import com.komikatow.komiku.ui.activityes.TeknologiActivity;
 
 public final class FragmentSetting extends PreferenceFragmentCompat {
     private Preference bahasa;
@@ -41,6 +44,13 @@ public final class FragmentSetting extends PreferenceFragmentCompat {
         assert version != null;
         version.setSummary("Package : " + BuildConfig.APPLICATION_ID + "\n" + "Version : " + BuildConfig.VERSION_NAME);
 
+        teknologi.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(@NonNull Preference preference) {
 
+                startActivity(new Intent(getContext(), TeknologiActivity.class));
+                return true;
+            }
+        });
     }
 }
