@@ -63,15 +63,9 @@
             android:enabled="false"
             app:key="version"/>
 
-        <Preference app:title="Teknologi"
-            android:summary="Melihat teknologi yg digunakan aplikasi ini"
-            app:key="teknologi"
-            android:icon="@drawable/baseline_architecture_24"/>
-
-        <Preference app:title="About Developer"
-            android:summary="Melihat detail info developer aplikasi"
-            app:key="about"
-            android:icon="@drawable/baseline_info_24"/>
+        <Preference app:title="Laporkan Bug"
+            android:icon="@drawable/baseline_bug_report_24"
+            app:key="bug"/>
 
     </PreferenceCategory>
 

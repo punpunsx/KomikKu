@@ -50,13 +50,6 @@
             android:exported="false"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.activityes.TeknologiActivity"
-            android:screenOrientation="portrait"
-            android:exported="true"/>
-
-        <activity android:name=".ui.activityes.AboutDevActivity"
-            android:screenOrientation="portrait"
-            android:exported="true"/>
 
     </application>
 

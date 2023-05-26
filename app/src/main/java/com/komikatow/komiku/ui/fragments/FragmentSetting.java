@@ -2,9 +2,9 @@ package com.komikatow.komiku.ui.fragments;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -13,22 +13,18 @@ import androidx.preference.SwitchPreference;
 
 import com.komikatow.komiku.BuildConfig;
 import com.komikatow.komiku.R;
-import com.komikatow.komiku.ui.activityes.TeknologiActivity;
 
 public final class FragmentSetting extends PreferenceFragmentCompat {
-    private Preference bahasa;
-    private Preference teknologi;
-    private Preference developer;
 
     @Override
     public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
         setPreferencesFromResource(R.xml.fragment_setting, rootKey);
 
-        bahasa = findPreference("bahasa");
-        teknologi = findPreference("teknologi");
-        developer = findPreference("about");
 
         final SwitchPreference mode = findPreference("mode");
+        final Preference bahasa = findPreference("bahasa");
+        final Preference bug = findPreference("bug");
+
         final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
         final boolean modeSummary = sharedPreferences.getBoolean("mode", false);
 
@@ -44,13 +40,16 @@ public final class FragmentSetting extends PreferenceFragmentCompat {
         assert version != null;
         version.setSummary("Package : " + BuildConfig.APPLICATION_ID + "\n" + "Version : " + BuildConfig.VERSION_NAME);
 
-        teknologi.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(@NonNull Preference preference) {
 
-                startActivity(new Intent(getContext(), TeknologiActivity.class));
-                return true;
-            }
+        assert bug != null;
+        bug.setOnPreferenceClickListener(preference -> {
+
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("https://api.whatsapp.com/send/?phone=0895323021645&text&type=phone_number&app_absent=0"));
+            startActivity(intent);
+
+            return true;
         });
     }
+
 }

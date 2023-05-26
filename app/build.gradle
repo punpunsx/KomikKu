@@ -4,6 +4,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('D:\\keystore\\keyKomik.jks')
+            storePassword 'sandibaru5'
+            keyAlias 'key0'
+            keyPassword 'sandibaru5'
+        }
+    }
     namespace 'com.komikatow.komiku'
     compileSdk 33
 
@@ -15,6 +23,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.release
     }
 
     buildTypes {
