@@ -11,6 +11,8 @@ Jika app tidak berfungsi mungkin api yg digunakan oleh app ini sudah mati
 - Komik China
 - Pencarian Komik 
 - Genre yang lengkap
+- History baca
+- Simpan komik untuk dibaca nanti
 
 ## Authors 
 
