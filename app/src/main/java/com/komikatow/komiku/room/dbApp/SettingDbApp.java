@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import com.komikatow.komiku.room.dao.SettingDao;
 import com.komikatow.komiku.room.enity.SettingEnity;
 
-@Database(entities = {SettingEnity.class}, version = 1)
+@Database(entities = {SettingEnity.class}, version = 1, exportSchema = false)
 public abstract class SettingDbApp extends RoomDatabase {
 
     private static SettingDbApp INSTACE;

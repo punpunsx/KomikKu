@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import com.komikatow.komiku.room.enity.ModelChapter;
 import com.komikatow.komiku.room.dao.HistryDao;
 
-@Database(entities = {ModelChapter.class}, version = 1)
+@Database(entities = {ModelChapter.class}, version = 1, exportSchema = false)
 public abstract class HistoryDbApp extends RoomDatabase {
 
     public abstract HistryDao dao();
