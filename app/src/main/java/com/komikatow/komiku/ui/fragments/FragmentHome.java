@@ -55,11 +55,16 @@ public final class FragmentHome extends BaseFragment <FragmentHomeBinding> imple
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getBinding().btnSarch.setOnClickListener(v-> startActivity(new Intent(getContext(), SearchActivity.class)));
         DialogsKt.setDialogLoading(requireContext(), "Loading...", "Mohon tunggu sebentar", false);
         DialogsKt.showDialogLoading();
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
+        getBinding().btnSarch.setOnClickListener(v-> {
+            startActivity(new Intent(getContext(), SearchActivity.class));
+            if (sharedPreferences.getBoolean("animasiTransisi", false)){
+                Animatoo.INSTANCE.animateZoom(requireContext());
+            }
+        });
 
         getResponseKomikJepang();
         getResponseGenreList();
@@ -329,9 +334,9 @@ public final class FragmentHome extends BaseFragment <FragmentHomeBinding> imple
         intent.putExtra("type", listKomikJepang.get(pos).getType());
 
 
-        boolean transitionStaus = sharedPreferences.getBoolean("animasiTransisi", false);
+        boolean transitionStatus = sharedPreferences.getBoolean("animasiTransisi", false);
 
-        if (transitionStaus){
+        if (transitionStatus){
             startActivity(intent);
             Animatoo.INSTANCE.animateZoom(requireContext());
         }else {

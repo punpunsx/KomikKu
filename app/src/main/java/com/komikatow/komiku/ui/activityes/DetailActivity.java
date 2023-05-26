@@ -2,15 +2,18 @@ package com.komikatow.komiku.ui.activityes;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.androidnetworking.error.ANError;
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.komikatow.komiku.MainActivity;
@@ -45,6 +48,9 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
     private String chapterName;
     private String waktu;
     private String endpointDetail;
+    private SharedPreferences sharedPreferences;
+    private boolean transitionStatus;
+    private boolean animasiGambar;
 
 
     @Override
@@ -62,6 +68,11 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
 
         getDetailKomik();
         MainActivity.getTimeInLocale();
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        transitionStatus = sharedPreferences.getBoolean("animasiTransisi", false);
+        animasiGambar = sharedPreferences.getBoolean("animasiGambar", true);
+
 
     }
 
@@ -145,7 +156,13 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
             intent.putExtra("name",listGenre.get(pos).getGenre());
             intent.putExtra("endpointD",listGenre.get(pos).getEndpointgenre());
 
-            startActivity(intent);
+            if (transitionStatus){
+                startActivity(intent);
+                Animatoo.INSTANCE.animateZoom(this);
+
+            }else {
+                startActivity(intent);
+            }
 
         });
         getBinding().rvGenre.setLayoutManager(new GridLayoutManager(this, 4));
@@ -226,7 +243,13 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
         intent.putExtra("endpoint",listChapter.get(pos).getEndPointCh());
         intent.putExtra("number", listChapter.get(pos).getNemeCh());
 
-        startActivity(intent);
+        if (transitionStatus){
+            startActivity(intent);
+            Animatoo.INSTANCE.animateZoom(this);
+
+        }else {
+            startActivity(intent);
+        }
 
     }
 
@@ -273,5 +296,20 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
             getBinding().fabAdd.setEnabled(false);
         }
 
+        if (animasiGambar){
+            getBinding().detailImage.resume();
+        }else {
+            getBinding().detailImage.pause();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        if (transitionStatus){
+            Animatoo.INSTANCE.animateSwipeRight(this);
+
+        }
     }
 }

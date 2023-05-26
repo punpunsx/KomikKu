@@ -7,6 +7,7 @@
         <SwitchPreference
             app:title="Image Quality"
             android:icon="@drawable/baseline_high_quality_24"
+            android:enabled="false"
             android:summary="Selalu tampilkan qualitas terbaik"
             app:key="quality"/>
 
@@ -18,6 +19,7 @@
 
         <SwitchPreference
             app:title="Cache"
+            android:defaultValue="true"
             android:icon="@drawable/baseline_cached_24"
             android:summary="Selalu simpan gambar pada cache\nJika diaktifkan maka ini akan menyimpan gambar pada cache aplikasi\nsehingga ketika lain waktu ditampilkan lagi ini tidak akan menggunakan data / wifi"
             app:key="cache"
@@ -26,6 +28,7 @@
         <SwitchPreference
             app:title="Animasi Detail"
             android:icon="@drawable/baseline_animation_24"
+            android:defaultValue="true"
             android:summary="Selalu animasikan gambar detail komik"
             app:key="animasiGambar"/>
 

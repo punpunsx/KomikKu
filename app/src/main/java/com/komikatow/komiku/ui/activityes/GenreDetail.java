@@ -1,19 +1,20 @@
 package com.komikatow.komiku.ui.activityes;
 
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.androidnetworking.error.ANError;
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.komikatow.komiku.adapter.AdapterKomik;
 import com.komikatow.komiku.databinding.ActivityGenreDetailBinding;
 import com.komikatow.komiku.model.ModelBaseKomik;
 import com.komikatow.komiku.utils.DialogsKt;
 import com.komikatow.komiku.utils.Endpoints;
-import com.komikatow.komiku.utils.ItemRecyclerClick;
 import com.komikatow.komiku.utils.Networking;
 
 import org.json.JSONArray;
@@ -23,10 +24,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class GenreDetail extends BaseActivity <ActivityGenreDetailBinding> implements ItemRecyclerClick {
+public final class GenreDetail extends BaseActivity <ActivityGenreDetailBinding> {
     private final List <ModelBaseKomik<String>> genreList = new ArrayList<>();
     private int pageCount = 1;
     private String url ;
+    private SharedPreferences sharedPreferences;
+    private boolean isTransition;
 
 
     @Override
@@ -41,10 +44,14 @@ public final class GenreDetail extends BaseActivity <ActivityGenreDetailBinding>
 
         DialogsKt.setDialogLoading(this, "Loading...", "Sedang memuat konten mohon tunggu sebentar", false);
         DialogsKt.showDialogLoading();
-        getBinding().toolbar.setNavigationOnClickListener(v-> finish());
 
+        getBinding().toolbar.setNavigationOnClickListener(v-> finish());
         getGenreDetail();
         navigateToAnotherPage();
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        isTransition = sharedPreferences.getBoolean("animasiTransisi", false);
+
     }
 
 
@@ -132,15 +139,12 @@ public final class GenreDetail extends BaseActivity <ActivityGenreDetailBinding>
 
     }
 
-
     @Override
-    public void onClickListener(int pos) {
+    public void onBackPressed() {
+        super.onBackPressed();
 
-        Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra("endpoint", genreList.get(pos).getEndPoint());
-        intent.putExtra("type", genreList.get(pos).getType());
-
-        startActivity(intent);
+        if (isTransition){
+            Animatoo.INSTANCE.animateSwipeRight(this);
+        }
     }
-
 }
