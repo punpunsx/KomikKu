@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import android.content.Context
 import com.c.progress_dialog.BlackProgressDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.komikatow.komiku.R
 
 private lateinit var dialogProgrees:ProgressDialog
 private lateinit var alertDialog:MaterialAlertDialogBuilder
@@ -38,6 +39,7 @@ fun setAlertDialog(context: Context, title: String, msg: String, canclelable: Bo
     alertDialog = MaterialAlertDialogBuilder(context)
     alertDialog.setTitle(title)
     alertDialog.setMessage(msg)
+    alertDialog.setIcon(R.drawable.baseline_info_24)
     alertDialog.setCancelable(canclelable)
     alertDialog.setPositiveButton("oke") { dialog, _ ->
         listener.onOkeButton()

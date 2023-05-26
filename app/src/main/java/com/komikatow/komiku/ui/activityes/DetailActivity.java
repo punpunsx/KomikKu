@@ -92,7 +92,7 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
                     getBinding().tvIlustrator.setText("Illustrator : "+jsonObject.getString("illustator").trim());
                     getBinding().tvRating.setRating(Float.parseFloat(jsonObject.getString("score").trim()));
 
-                    if (type != null && !type.isEmpty()){
+                    if (type != null && !type.isEmpty() && type != " "){
                         getBinding().tvType.setVisibility(View.VISIBLE);
                         getBinding().tvType.setText("Type : "+getIntent().getStringExtra("type"));
 
