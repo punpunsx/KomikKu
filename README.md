@@ -43,33 +43,33 @@ Java.
 ## Screenshots
 
 ### Bagian Fragment Home Atas
-![Fragment Home Atas](/app/src/main/res/drawable/homeAtas.png)
+![Fragment Home Atas](/app/src/main/res/drawable/home_atas.png)
 
 ### Bagian Fragment Home Bawah
-![Fragment Home Bawah](/app/src/main/res/drawable/homeBawah.png)
+![Fragment Home Bawah](/app/src/main/res/drawable/home_bawah.png)
 
 ### Bagian Fragment Favorite
 ![Fragment Favorite](app/src/main/res/drawable/favorite.png)
 
 ### Bagian Fragment Riwayat
-![Fragment Riwayat](app/src/main/res/drawable/Riwayat.png)
+![Fragment Riwayat](app/src/main/res/drawable/riwayat.png)
  
 ### Bagian Fragment Pegaturan
 ![Fragment Pengaturan](app/src/main/res/drawable/pengaturan.png)
 
 
 ### Bagian Halaman Detail Genre
-![Halaman Detail Genre](app/src/main/res/drawable/halamanDetailGenre.png)
+![Halaman Detail Genre](app/src/main/res/drawable/halaman_detail_genre.png)
 
 ### Bagian Halaman Cari Komik
-![Halaman Search](app/src/main/res/drawable/halamanSearch.png)
+![Halaman Search](app/src/main/res/drawable/halaman_search.png)
 
 
 ### Bagian Halaman Detail Komik
-![Detail Activity](app/src/main/res/drawable/halamanDetail.png)
+![Detail Activity](app/src/main/res/drawable/halaman_detail.png)
 
 
 ### Bagian Halaman Baca Komik
-![Baca Activity](app/src/main/res/drawable/halamanBaca.png)
+![Baca Activity](app/src/main/res/drawable/halaman_baca.png)
 
 
