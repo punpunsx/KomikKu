@@ -31,6 +31,8 @@ public final class FragmentFavorite extends BaseFragment <FragmentFavoriteBindin
     private List<FavoriteEnity> allData;
     private AdapterFavorite adapterFavorite;
     private boolean isTransition;
+    private boolean getBahasa;
+    private String title, msg, from;
 
     @Override
     protected FragmentFavoriteBinding createBinding(LayoutInflater inflater, ViewGroup container) {
@@ -41,10 +43,11 @@ public final class FragmentFavorite extends BaseFragment <FragmentFavoriteBindin
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getAllItem();
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
         isTransition = sharedPreferences.getBoolean("animasiTransisi", false);
-
+        getBahasa = sharedPreferences.getBoolean("bahasa", true);
+        getAllItem();
+        getConfigLangague();
     }
 
     private void getAllItem(){
@@ -81,7 +84,7 @@ public final class FragmentFavorite extends BaseFragment <FragmentFavoriteBindin
                 @Override
                 public boolean onLongClickListener(int position) {
 
-                    DialogsKt.setAlertDialog(requireContext(), "Hapus", "Hapus komik : " + allData.get(position).getTitle() + " Dari favoritre", false, new OnDialogListener() {
+                    DialogsKt.setAlertDialog(requireContext(), title, msg + allData.get(position).getTitle() + from, false, new OnDialogListener() {
                         @SuppressLint("NotifyDataSetChanged")
                         @Override
                         public void onOkeButton() {
@@ -107,6 +110,10 @@ public final class FragmentFavorite extends BaseFragment <FragmentFavoriteBindin
             requireActivity().runOnUiThread(() -> {
                 getBinding().rvFav.setLayoutManager(new GridLayoutManager(getContext(), 3));
                 getBinding().rvFav.setAdapter(adapterFavorite);
+
+                if (getBahasa){
+                    getBinding().itemNull.setText("You haven't added your favorite comic, please click the favorite icon on the comic details to save data\n To delete data, please click on the comic whose data you want to delete");
+                }
             });
 
 
@@ -114,4 +121,16 @@ public final class FragmentFavorite extends BaseFragment <FragmentFavoriteBindin
 
     }
 
+    private void getConfigLangague(){
+        if (getBahasa){
+            title = "Delete";
+            msg = "Remove comic : ";
+            from = " from favorite";
+
+        }else {
+            title = "Hapus";
+            msg = "Hapus : ";
+            from = " dari favorite";
+        }
+    }
 }

@@ -3,7 +3,6 @@ package com.komikatow.komiku.ui.activityes
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.SearchView.OnQueryTextListener
@@ -19,6 +18,7 @@ import com.komikatow.komiku.utils.Endpoints
 import com.komikatow.komiku.utils.Networking
 import com.komikatow.komiku.utils.NoInternet
 import org.json.JSONObject
+
 class SearchActivity : BaseActivity <ActivitySearchBinding> () {
 
     private val listSearch:MutableList<ModelBaseKomik <String> > = ArrayList()

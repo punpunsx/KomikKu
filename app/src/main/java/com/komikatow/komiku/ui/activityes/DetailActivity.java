@@ -134,7 +134,7 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
             @Override
             public void onHttpsError(ANError anError) {
 
-                Toast.makeText(DetailActivity.this, "Error at : "+anError.getErrorBody(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(DetailActivity.this, "Error caused : "+anError.getErrorBody(), Toast.LENGTH_SHORT).show();
                 DialogsKt.dismissDialogLoading();
             }
         });

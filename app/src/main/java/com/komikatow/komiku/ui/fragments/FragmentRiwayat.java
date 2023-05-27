@@ -31,6 +31,9 @@ public final class FragmentRiwayat extends BaseFragment <FragmentRiwayatBinding>
     private List<ModelChapter > data;
     private ModelChapter enityChapter;
     private AdapterRiwayat adapterRiwayat;
+    private boolean getBahasa;
+    private String title,msg,from;
+
 
     @Override
     protected FragmentRiwayatBinding createBinding(LayoutInflater inflater, ViewGroup container) {
@@ -41,8 +44,11 @@ public final class FragmentRiwayat extends BaseFragment <FragmentRiwayatBinding>
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getAllData();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
+        getBahasa = sharedPreferences.getBoolean("bahasa", true);
+        getAllData();
+        getConfigLangague();
+
     }
 
     private void getAllData(){
@@ -56,6 +62,11 @@ public final class FragmentRiwayat extends BaseFragment <FragmentRiwayatBinding>
             requireActivity().runOnUiThread(() -> {
                 getBinding().rvHistory.setLayoutManager(new LinearLayoutManager(getContext()));
                 getBinding().rvHistory.setAdapter(adapterRiwayat);
+
+
+                if (getBahasa){
+                    getBinding().itemNull.setText("You haven't read the comic, please read it to save data\n To delete data, please press the comic you want to delete the data for");
+                }
             });
 
             if (data.isEmpty()){
@@ -89,7 +100,7 @@ public final class FragmentRiwayat extends BaseFragment <FragmentRiwayatBinding>
     @Override
     public boolean onLongClickListener(int pos) {
 
-        DialogsKt.setAlertDialog(requireContext(), "Hapus...", "Hapus " + data.get(pos).getNameKomik() + " Dari riwayat baca", false, new OnDialogListener() {
+        DialogsKt.setAlertDialog(requireContext(), title, msg + data.get(pos).getNameKomik() + from, false, new OnDialogListener() {
             @Override
             public void onOkeButton() {
 
@@ -111,6 +122,19 @@ public final class FragmentRiwayat extends BaseFragment <FragmentRiwayatBinding>
         });
         DialogsKt.showAlertDialog();
         return true;
+    }
+
+    private void getConfigLangague(){
+        if (getBahasa){
+            title = "Delete";
+            msg = "Remove comic : ";
+            from = " from history";
+
+        }else {
+            title = "Hapus";
+            msg = "Hapus : ";
+            from = " dari riwayat baca";
+        }
     }
 
 }

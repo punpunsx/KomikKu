@@ -29,8 +29,8 @@ public final class GenreDetail extends BaseActivity <ActivityGenreDetailBinding>
     private final List <ModelBaseKomik<String>> genreList = new ArrayList<>();
     private int pageCount = 1;
     private String url ;
-    private SharedPreferences sharedPreferences;
     private boolean isTransition;
+    private boolean getBahasa;
 
 
     @Override
@@ -43,15 +43,22 @@ public final class GenreDetail extends BaseActivity <ActivityGenreDetailBinding>
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        DialogsKt.setDialogLoading(this, "Loading...", "Sedang memuat konten mohon tunggu sebentar", false);
-        DialogsKt.showDialogLoading();
-
         getBinding().toolbar.setNavigationOnClickListener(v-> finish());
         getGenreDetail();
         navigateToAnotherPage();
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         isTransition = sharedPreferences.getBoolean("animasiTransisi", false);
+        getBahasa = sharedPreferences.getBoolean("bahasa", true);
+
+        if (getBahasa){
+            DialogsKt.setDialogLoading(this, "Loading...", "Loading content please wait a moment", false);
+            DialogsKt.showDialogLoading();
+
+        }else {
+            DialogsKt.setDialogLoading(this, "Loading...", "Sedang memuat konten mohon tunggu", false);
+            DialogsKt.showDialogLoading();
+        }
 
     }
 

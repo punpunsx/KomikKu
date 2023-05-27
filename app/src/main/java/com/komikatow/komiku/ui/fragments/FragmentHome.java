@@ -126,7 +126,7 @@ public final class FragmentHome extends BaseFragment <FragmentHomeBinding> imple
             @Override
             public void onHttpsError(ANError anError) {
 
-                Toast.makeText(getContext(), "Error on : "+anError.getErrorBody(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Error on : "+anError.getErrorDetail(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -168,7 +168,7 @@ public final class FragmentHome extends BaseFragment <FragmentHomeBinding> imple
 
             @Override
             public void onHttpsError(ANError anError) {
-                Toast.makeText(getContext(), "Error on : "+anError.getErrorBody(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Error on : "+anError.getErrorDetail(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -226,7 +226,7 @@ public final class FragmentHome extends BaseFragment <FragmentHomeBinding> imple
             @Override
             public void onHttpsError(ANError anError) {
 
-                Toast.makeText(getContext(), "Error on : "+anError.getErrorBody(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Error on : "+anError.getErrorDetail(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -276,7 +276,7 @@ public final class FragmentHome extends BaseFragment <FragmentHomeBinding> imple
             @Override
             public void onHttpsError(ANError anError) {
 
-                Toast.makeText(getContext(), "Error on : "+anError.getErrorBody(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Error on : "+anError.getErrorDetail(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -326,7 +326,7 @@ public final class FragmentHome extends BaseFragment <FragmentHomeBinding> imple
             @Override
             public void onHttpsError(ANError anError) {
 
-                Toast.makeText(getContext(), "Error on : "+anError.getErrorBody(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Error on : "+anError.getErrorDetail(), Toast.LENGTH_SHORT).show();
                 DialogsKt.dismissDialogLoading();
             }
         });

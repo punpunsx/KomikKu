@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
@@ -31,12 +32,14 @@ public final class BacaActivitty extends BaseActivity <ActivityBacaBinding>{
     private final List <ModelChapterDetail <String> > list = new ArrayList<>();
     private boolean transitionStatus;
     private boolean modeBaca;
+    private boolean bahasa;
 
     @Override
     protected ActivityBacaBinding createBinding(LayoutInflater layoutInflater) {
         return ActivityBacaBinding.inflate(layoutInflater);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,12 +50,20 @@ public final class BacaActivitty extends BaseActivity <ActivityBacaBinding>{
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         transitionStatus = sharedPreferences.getBoolean("animasiTransisi", false);
         modeBaca = sharedPreferences.getBoolean("mode", false);
+        bahasa = sharedPreferences.getBoolean("bahasa", true);
 
         getBinding().toolbar.setNavigationOnClickListener(v->{
             finish();
             Animatoo.INSTANCE.animateSwipeRight(this);
         });
 
+        if (bahasa){
+            getBinding().btnSebelumnya.setText("Prev Chapter");
+            getBinding().btnSelanjutnya.setText("Next Chapter");
+        }else {
+            getBinding().btnSebelumnya.setText("Bab Sebelumnya");
+            getBinding().btnSelanjutnya.setText("Bab Selanjutnya");
+        }
     }
 
     private void getDetailChapter(String url){
@@ -83,7 +94,7 @@ public final class BacaActivitty extends BaseActivity <ActivityBacaBinding>{
 
             @Override
             public void onHttpsError(ANError anError) {
-
+                Toast.makeText(BacaActivitty.this, "Error caused : "+anError.getErrorDetail(), Toast.LENGTH_SHORT).show();
             }
         });
     }
