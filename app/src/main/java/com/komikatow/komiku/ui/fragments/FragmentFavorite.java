@@ -2,6 +2,7 @@ package com.komikatow.komiku.ui.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +10,10 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.komikatow.komiku.adapter.AdapterFavorite;
 import com.komikatow.komiku.databinding.FragmentFavoriteBinding;
 import com.komikatow.komiku.room.dbApp.FavoriteDbApp;
@@ -27,6 +30,7 @@ public final class FragmentFavorite extends BaseFragment <FragmentFavoriteBindin
     private FavoriteDbApp database;
     private List<FavoriteEnity> allData;
     private AdapterFavorite adapterFavorite;
+    private boolean isTransition;
 
     @Override
     protected FragmentFavoriteBinding createBinding(LayoutInflater inflater, ViewGroup container) {
@@ -38,6 +42,9 @@ public final class FragmentFavorite extends BaseFragment <FragmentFavoriteBindin
         super.onViewCreated(view, savedInstanceState);
 
         getAllItem();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
+        isTransition = sharedPreferences.getBoolean("animasiTransisi", false);
+
     }
 
     private void getAllItem(){
@@ -60,7 +67,14 @@ public final class FragmentFavorite extends BaseFragment <FragmentFavoriteBindin
 
                     Intent intent = new Intent(getContext(), DetailActivity.class);
                     intent.putExtra("endpoint", allData.get(pos).getEndpoint());
-                    startActivity(intent);
+
+                    if (isTransition){
+                        startActivity(intent);
+                        Animatoo.INSTANCE.animateZoom(requireContext());
+
+                    }else {
+                        startActivity(intent);
+                    }
 
                 }
 
