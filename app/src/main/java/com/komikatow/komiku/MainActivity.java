@@ -1,5 +1,6 @@
 package com.komikatow.komiku;
 
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.material.navigation.NavigationBarView;
 import com.komikatow.komiku.databinding.ActivityMainBinding;
@@ -29,7 +31,7 @@ public final class MainActivity extends BaseActivity <ActivityMainBinding> imple
 
     @Override
     protected ActivityMainBinding createBinding(LayoutInflater layoutInflater) {
-        return ActivityMainBinding.inflate(getLayoutInflater());
+        return ActivityMainBinding.inflate(layoutInflater);
     }
 
     @Override
@@ -39,6 +41,7 @@ public final class MainActivity extends BaseActivity <ActivityMainBinding> imple
         setFrament(new FragmentHome());
         getBinding().mainBottomBar.setSelectedItemId(R.id.action_home);
         onItemMenuSelected();
+
 
     }
 
@@ -119,5 +122,22 @@ public final class MainActivity extends BaseActivity <ActivityMainBinding> imple
         super.onResume();
 
         NoInternet.Companion.checkInternet(getLifecycle(), this);
+
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean bahasaSaatIni = sharedPreferences.getBoolean("bahasa", true);
+
+        if (bahasaSaatIni){
+
+            getBinding().mainBottomBar.getMenu().findItem(R.id.action_home).setTitle("Home");
+            getBinding().mainBottomBar.getMenu().findItem(R.id.action_fav).setTitle("Favorite");
+            getBinding().mainBottomBar.getMenu().findItem(R.id.action_riwayat).setTitle("History");
+            getBinding().mainBottomBar.getMenu().findItem(R.id.action_setting).setTitle("Settings");
+
+        }else {
+            getBinding().mainBottomBar.getMenu().findItem(R.id.action_home).setTitle("Rumah");
+            getBinding().mainBottomBar.getMenu().findItem(R.id.action_fav).setTitle("Favorite");
+            getBinding().mainBottomBar.getMenu().findItem(R.id.action_riwayat).setTitle("Riwayat");
+            getBinding().mainBottomBar.getMenu().findItem(R.id.action_setting).setTitle("Pengaturan");
+        }
     }
 }

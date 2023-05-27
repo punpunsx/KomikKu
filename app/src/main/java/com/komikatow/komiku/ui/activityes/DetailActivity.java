@@ -49,9 +49,9 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
     private String chapterName;
     private String waktu;
     private String endpointDetail;
-    private SharedPreferences sharedPreferences;
     private boolean transitionStatus;
     private boolean animasiGambar;
+    private boolean getBahasa;
 
 
     @Override
@@ -70,9 +70,10 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
         getDetailKomik();
         MainActivity.getTimeInLocale();
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         transitionStatus = sharedPreferences.getBoolean("animasiTransisi", false);
         animasiGambar = sharedPreferences.getBoolean("animasiGambar", true);
+        getBahasa = sharedPreferences.getBoolean("bahasa", true);
 
         getBinding().toolbar.setNavigationOnClickListener(v->{
 
@@ -210,7 +211,12 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
         getBinding().rvChapter.setLayoutManager(new GridLayoutManager(this, 4));
         getBinding().rvChapter.setAdapter(adapterChapter);
 
-        getBinding().tvTotalCh.setText("Total Chapter : "+ adapterChapter.getItemCount());
+        if (getBahasa){
+            getBinding().tvTotalCh.setText("Total Chapters : "+ adapterChapter.getItemCount());
+        }else {
+            getBinding().tvTotalCh.setText("Jumlah Chapter : "+ adapterChapter.getItemCount());
+        }
+
     }
 
     //Ketika item dari chapter di klik
@@ -283,7 +289,14 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
                     new Thread(() -> database.dao().insertData(data)).start();
                     runOnUiThread(() -> {
                         getBinding().fabAdd.setEnabled(false);
-                        Toast.makeText(DetailActivity.this, "Berhasil menambahkan data ke favorite", Toast.LENGTH_SHORT).show();
+
+                        if (getBahasa){
+                            Toast.makeText(DetailActivity.this, "Successfully added data to favorites", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(DetailActivity.this, "Berhasil menambahkan data ke favorite", Toast.LENGTH_SHORT).show();
+                        }
+
+
                     });
                 });
 

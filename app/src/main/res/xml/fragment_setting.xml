@@ -2,10 +2,10 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="Quality, dan Animasi">
+    <PreferenceCategory app:title="Quality, and Animasi">
 
         <SwitchPreference
-            app:title="Image Quality"
+            app:title="Qualitas gambar"
             android:icon="@drawable/baseline_high_quality_24"
             android:enabled="false"
             android:defaultValue="true"
@@ -23,7 +23,7 @@
 
         <SwitchPreference
             app:title="Mode Baca"
-            app:summary=" "
+            app:summary="Mode Saat ini : Scrool"
             android:icon="@drawable/baseline_menu_book_24"
             app:key="mode"/>
 
@@ -44,12 +44,11 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="Bahasa">
+    <PreferenceCategory app:title="Language">
 
         <SwitchPreference app:title="Bahasa aplikasi"
             android:summary="Saat ini : Indonesia"
-            android:enabled="false"
-            android:defaultValue="true"
+            app:defaultValue="true"
             android:icon="@drawable/baseline_language_24"
             app:key="bahasa"/>
 

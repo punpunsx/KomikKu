@@ -1,6 +1,7 @@
 package com.komikatow.komiku.ui.fragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,8 +9,10 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.komikatow.komiku.adapter.AdapterRiwayat;
 import com.komikatow.komiku.databinding.FragmentRiwayatBinding;
 import com.komikatow.komiku.room.dbApp.HistoryDbApp;
@@ -23,6 +26,7 @@ import java.util.List;
 
 public final class FragmentRiwayat extends BaseFragment <FragmentRiwayatBinding> implements ItemRecyclerClick {
 
+    private SharedPreferences sharedPreferences;
     private HistoryDbApp historyDbApp;
     private List<ModelChapter > data;
     private ModelChapter enityChapter;
@@ -38,6 +42,7 @@ public final class FragmentRiwayat extends BaseFragment <FragmentRiwayatBinding>
         super.onViewCreated(view, savedInstanceState);
 
         getAllData();
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
     }
 
     private void getAllData(){
@@ -67,9 +72,17 @@ public final class FragmentRiwayat extends BaseFragment <FragmentRiwayatBinding>
     @Override
     public void onClickListener(int pos) {
 
+        boolean isTransition = sharedPreferences.getBoolean("animasiTransisi", false);
         Intent intent = new Intent(getContext(), DetailActivity.class);
         intent.putExtra("endpoint", data.get(pos).getEndPointDetail());
-        startActivity(intent);
+
+        if (isTransition){
+            startActivity(intent);
+            Animatoo.INSTANCE.animateZoom(requireContext());
+
+        }else {
+            startActivity(intent);
+        }
 
     }
 

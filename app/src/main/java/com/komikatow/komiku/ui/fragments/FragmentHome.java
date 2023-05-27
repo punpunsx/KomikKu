@@ -1,5 +1,6 @@
 package com.komikatow.komiku.ui.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -51,12 +52,11 @@ public final class FragmentHome extends BaseFragment <FragmentHomeBinding> imple
         return FragmentHomeBinding.inflate(inflater, container, false);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        DialogsKt.setDialogLoading(requireContext(), "Loading...", "Mohon tunggu sebentar", false);
-        DialogsKt.showDialogLoading();
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
         getBinding().btnSarch.setOnClickListener(v-> {
@@ -65,6 +65,21 @@ public final class FragmentHome extends BaseFragment <FragmentHomeBinding> imple
                 Animatoo.INSTANCE.animateZoom(requireContext());
             }
         });
+
+        if (sharedPreferences.getBoolean("bahasa", true)){
+            getBinding().txtKomikJepangId.setText("Japanese comics");
+            getBinding().txtGenreId.setText("List Genre");
+            getBinding().txtReleaseId.setText("Latest comic updates");
+            getBinding().txtKomikKoreaId.setText("Korean comics");
+            getBinding().txtKomikChinaId.setText("Chinese comics");
+
+            DialogsKt.setDialogLoading(requireContext(), "Loading...", "Please Wait", false);
+            DialogsKt.showDialogLoading();
+
+        }else {
+            DialogsKt.setDialogLoading(requireContext(), "Loading...", "Mohon tunggu sebentar", false);
+            DialogsKt.showDialogLoading();
+        }
 
         getResponseKomikJepang();
         getResponseGenreList();
@@ -345,8 +360,8 @@ public final class FragmentHome extends BaseFragment <FragmentHomeBinding> imple
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStop() {
+        super.onStop();
 
         DialogsKt.dismissDialogLoading();
     }
