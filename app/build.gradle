@@ -45,26 +45,6 @@ android {
         buildConfig true
     }
 
-    sourceSets {
-        main {
-            res.srcDirs = ['src/main/res']
-            resources {
-                exclude 'drawable/halaman_baca.png'
-                exclude 'drawable/favorite.png'
-                exclude 'drawable/halaman_detail.png'
-                exclude 'drawable/halaman_detail_genre.png'
-                exclude 'drawable/halaman_search.png'
-                exclude 'drawable/home_atas.png'
-                exclude 'drawable/home_bawah.png'
-                exclude 'drawable/icons_github.png'
-                exclude 'drawable/icons_telegram.png'
-                exclude 'drawable/icons_whatsapp.png'
-                exclude 'drawable/pengaturan.png'
-                exclude 'drawable/riwayat.png'
-            }
-
-        }
-    }
 
 }
 
