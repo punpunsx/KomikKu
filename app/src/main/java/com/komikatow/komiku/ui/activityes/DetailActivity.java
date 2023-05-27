@@ -74,7 +74,14 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
         transitionStatus = sharedPreferences.getBoolean("animasiTransisi", false);
         animasiGambar = sharedPreferences.getBoolean("animasiGambar", true);
 
+        getBinding().toolbar.setNavigationOnClickListener(v->{
 
+            if (transitionStatus){
+                finish();
+                Animatoo.INSTANCE.animateSwipeRight(this);
+            }
+
+        });
     }
 
     private void getDetailKomik(){

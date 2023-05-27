@@ -343,4 +343,11 @@ public final class FragmentHome extends BaseFragment <FragmentHomeBinding> imple
             startActivity(intent);
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        DialogsKt.dismissDialogLoading();
+    }
 }

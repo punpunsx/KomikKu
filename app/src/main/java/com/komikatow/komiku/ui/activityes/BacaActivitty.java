@@ -29,7 +29,6 @@ import java.util.List;
 
 public final class BacaActivitty extends BaseActivity <ActivityBacaBinding>{
     private final List <ModelChapterDetail <String> > list = new ArrayList<>();
-    private SharedPreferences sharedPreferences;
     private boolean transitionStatus;
     private boolean modeBaca;
 
@@ -45,9 +44,14 @@ public final class BacaActivitty extends BaseActivity <ActivityBacaBinding>{
         getDetailChapter(Endpoints.KOMIK_DETAIL_CHAPTER+getIntent().getStringExtra("endpoint"));
         getBinding().toolbar.setNavigationOnClickListener(v-> finish());
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         transitionStatus = sharedPreferences.getBoolean("animasiTransisi", false);
         modeBaca = sharedPreferences.getBoolean("mode", false);
+
+        getBinding().toolbar.setNavigationOnClickListener(v->{
+            finish();
+            Animatoo.INSTANCE.animateSwipeRight(this);
+        });
 
     }
 
@@ -123,8 +127,8 @@ public final class BacaActivitty extends BaseActivity <ActivityBacaBinding>{
 
         if (transitionStatus){
             startActivity(intent);
-            Animatoo.INSTANCE.animateZoom(this);
             finish();
+            Animatoo.INSTANCE.animateZoom(this);
         }
 
     }

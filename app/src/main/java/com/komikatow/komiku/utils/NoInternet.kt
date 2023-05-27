@@ -2,21 +2,16 @@ package com.komikatow.komiku.utils
 
 import android.app.Activity
 import androidx.lifecycle.Lifecycle
-import org.imaginativeworld.oopsnointernet.callbacks.ConnectionCallback
-import org.imaginativeworld.oopsnointernet.dialogs.pendulum.NoInternetDialogPendulum
+import org.imaginativeworld.oopsnointernet.dialogs.signal.NoInternetDialogSignal
 
 class NoInternet {
 
     companion object{
         fun checkInternet(lifecycle: Lifecycle, activity: Activity){
 
-            NoInternetDialogPendulum.Builder(activity, lifecycle).apply {
+            NoInternetDialogSignal.Builder(activity, lifecycle).apply {
                 dialogProperties.apply {
-                    connectionCallback = object : ConnectionCallback { // Optional
-                        override fun hasActiveConnection(hasActiveConnection: Boolean) {
-                            // ...
-                        }
-                    }
+
 
                     cancelable = false
                     noInternetConnectionTitle = "No Internet"
