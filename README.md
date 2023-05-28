@@ -67,6 +67,9 @@ Java.
 ### Bagian jika terjadi error saat memuat data
 ![Error](app/src/main/res/Screenshot_20230529-011645.png)
 
+### Bagian jika terjadi error saat tidak ada koneksi internet
+![NoInternet](app/src/main/res/Screenshot_20230529-012854.png)
+
 
 ### Bagian Halaman Detail Genre
 ![Halaman Detail Genre](app/src/main/res/halaman_detail_genre.png)
