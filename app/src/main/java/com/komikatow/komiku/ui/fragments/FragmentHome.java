@@ -181,7 +181,13 @@ public final class FragmentHome extends BaseFragment <FragmentHomeBinding> imple
             intent.putExtra("name",listGenre.get(pos).getGenre());
             intent.putExtra("endpoint",listGenre.get(pos).getEndpointgenre());
 
-            startActivity(intent);
+            if (sharedPreferences.getBoolean("animasiTransisi", false)){
+                startActivity(intent);
+                Animatoo.INSTANCE.animateZoom(requireContext());
+
+            }else {
+                startActivity(intent);
+            }
 
         });
         getBinding().rvListGenre.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));

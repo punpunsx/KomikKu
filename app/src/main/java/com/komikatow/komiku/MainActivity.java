@@ -20,6 +20,7 @@ import com.komikatow.komiku.ui.fragments.FragmentFavorite;
 import com.komikatow.komiku.ui.fragments.FragmentHome;
 import com.komikatow.komiku.ui.fragments.FragmentRiwayat;
 import com.komikatow.komiku.ui.fragments.FragmentSetting;
+import com.komikatow.komiku.utils.Networking;
 import com.komikatow.komiku.utils.NoInternet;
 
 import java.util.Calendar;
@@ -41,7 +42,7 @@ public final class MainActivity extends BaseActivity <ActivityMainBinding> imple
         setFrament(new FragmentHome());
         getBinding().mainBottomBar.setSelectedItemId(R.id.action_home);
         onItemMenuSelected();
-
+        Networking.getUpdate(this, this);
 
     }
 
@@ -75,23 +76,48 @@ public final class MainActivity extends BaseActivity <ActivityMainBinding> imple
 
         if (item.getItemId() == R.id.action_home){
             setFrament(new FragmentHome());
+            refleshWithNewLangague();
 
         } else if (item.getItemId() ==  R.id.action_fav) {
             setFrament(new FragmentFavorite());
+            refleshWithNewLangague();
 
         } else if (item.getItemId() ==  R.id.action_riwayat) {
             setFrament(new FragmentRiwayat());
+            refleshWithNewLangague();
 
         } else if (item.getItemId() ==  R.id.action_setting) {
             setFrament(new FragmentSetting());
+            refleshWithNewLangague();
 
         }else {
             setFrament(new FragmentHome());
+            refleshWithNewLangague();
         }
 
         return true;
     }
 
+    private void refleshWithNewLangague(){
+
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean bahasaSaatIni = sharedPreferences.getBoolean("bahasa", true);
+
+        if (bahasaSaatIni){
+
+            getBinding().mainBottomBar.getMenu().findItem(R.id.action_home).setTitle("Home");
+            getBinding().mainBottomBar.getMenu().findItem(R.id.action_fav).setTitle("Favorite");
+            getBinding().mainBottomBar.getMenu().findItem(R.id.action_riwayat).setTitle("History");
+            getBinding().mainBottomBar.getMenu().findItem(R.id.action_setting).setTitle("Settings");
+
+        }else {
+            getBinding().mainBottomBar.getMenu().findItem(R.id.action_home).setTitle("Rumah");
+            getBinding().mainBottomBar.getMenu().findItem(R.id.action_fav).setTitle("Favorite");
+            getBinding().mainBottomBar.getMenu().findItem(R.id.action_riwayat).setTitle("Riwayat");
+            getBinding().mainBottomBar.getMenu().findItem(R.id.action_setting).setTitle("Pengaturan");
+        }
+
+    }
     @Override
     public void onBackPressed() {
 
@@ -122,22 +148,6 @@ public final class MainActivity extends BaseActivity <ActivityMainBinding> imple
         super.onResume();
 
         NoInternet.Companion.checkInternet(getLifecycle(), this);
-
-        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean bahasaSaatIni = sharedPreferences.getBoolean("bahasa", true);
-
-        if (bahasaSaatIni){
-
-            getBinding().mainBottomBar.getMenu().findItem(R.id.action_home).setTitle("Home");
-            getBinding().mainBottomBar.getMenu().findItem(R.id.action_fav).setTitle("Favorite");
-            getBinding().mainBottomBar.getMenu().findItem(R.id.action_riwayat).setTitle("History");
-            getBinding().mainBottomBar.getMenu().findItem(R.id.action_setting).setTitle("Settings");
-
-        }else {
-            getBinding().mainBottomBar.getMenu().findItem(R.id.action_home).setTitle("Rumah");
-            getBinding().mainBottomBar.getMenu().findItem(R.id.action_fav).setTitle("Favorite");
-            getBinding().mainBottomBar.getMenu().findItem(R.id.action_riwayat).setTitle("Riwayat");
-            getBinding().mainBottomBar.getMenu().findItem(R.id.action_setting).setTitle("Pengaturan");
-        }
     }
+
 }

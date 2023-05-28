@@ -11,6 +11,10 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-dontwarn okio.**
+-dontwarn javax.annotation.Nullable
+-dontwarn org.conscrypt.Conscrypt
+-dontwarn org.conscrypt.OpenSSLProvider
 
 # Uncomment this to preserve the line number information for
 # debugging stack traces.
