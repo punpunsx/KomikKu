@@ -9,6 +9,7 @@ Jika app tidak berfungsi mungkin api yg digunakan oleh app ini sudah mati
 - Komik Jepang
 - Komik Korea
 - Komik China
+- Bahasa Aplikasi : Inggris, dan Indonesia(Bukan bahasa komiknya)
 - Pencarian Komik 
 - Genre yang lengkap
 - History baca
@@ -49,33 +50,33 @@ Java.
 ## Screenshots
 
 ### Bagian Fragment Home Atas
-![Fragment Home Atas](/app/src/main/res/drawable/home_atas.png)
+![Fragment Home Atas](/app/src/main/res/home_atas.png)
 
 ### Bagian Fragment Home Bawah
-![Fragment Home Bawah](/app/src/main/res/drawable/home_bawah.png)
+![Fragment Home Bawah](/app/src/main/res/home_bawah.png)
 
 ### Bagian Fragment Favorite
-![Fragment Favorite](app/src/main/res/drawable/favorite.png)
+![Fragment Favorite](app/src/main/res/favorite.png)
 
 ### Bagian Fragment Riwayat
-![Fragment Riwayat](app/src/main/res/drawable/riwayat.png)
+![Fragment Riwayat](app/src/main/res/riwayat.png)
  
 ### Bagian Fragment Pegaturan
-![Fragment Pengaturan](app/src/main/res/drawable/pengaturan.png)
+![Fragment Pengaturan](app/src/main/res/pengaturan.png)
 
 
 ### Bagian Halaman Detail Genre
-![Halaman Detail Genre](app/src/main/res/drawable/halaman_detail_genre.png)
+![Halaman Detail Genre](app/src/main/res/halaman_detail_genre.png)
 
 ### Bagian Halaman Cari Komik
-![Halaman Search](app/src/main/res/drawable/halaman_search.png)
+![Halaman Search](app/src/main/res/halaman_search.png)
 
 
 ### Bagian Halaman Detail Komik
-![Detail Activity](app/src/main/res/drawable/halaman_detail.png)
+![Detail Activity](app/src/main/res/halaman_detail.png)
 
 
 ### Bagian Halaman Baca Komik
-![Baca Activity](app/src/main/res/drawable/halaman_baca.png)
+![Baca Activity](app/src/main/res/halaman_baca.png)
 
 
