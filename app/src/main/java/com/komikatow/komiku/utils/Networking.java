@@ -41,7 +41,7 @@ public final class Networking {
     public static void getUpdate(Activity activity, Context context) {
 
         new Thread(() -> AndroidNetworking.get(Endpoints.BASE_UPDATE_API)
-                .addHeaders(Endpoints.API_KEY)
+                .addHeaders("X-Master-Key",Endpoints.API_KEY)
                 .setPriority(Priority.IMMEDIATE)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {

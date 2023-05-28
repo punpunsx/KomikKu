@@ -77,10 +77,7 @@ class SearchActivity : BaseActivity <ActivitySearchBinding> () {
                         adapterSearch(listSearch)
                     }
 
-                    override fun onHttpsError(anError: ANError) {
-                       anError.printStackTrace()
-                        Toast.makeText(this@SearchActivity, Endpoints.KOMIK_ALL_SEARCH+newText+"/?page=1", Toast.LENGTH_SHORT).show()
-                    }
+                    override fun onHttpsError(anError: ANError) = anError.printStackTrace()
                 })
 
                 return true

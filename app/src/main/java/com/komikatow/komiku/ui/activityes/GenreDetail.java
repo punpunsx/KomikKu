@@ -3,6 +3,8 @@ package com.komikatow.komiku.ui.activityes;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
@@ -107,7 +109,12 @@ public final class GenreDetail extends BaseActivity <ActivityGenreDetailBinding>
             @Override
             public void onHttpsError(ANError anError) {
                 DialogsKt.dismissDialogLoading();
-                anError.printStackTrace();
+                Toast.makeText(GenreDetail.this, "Error saat mencoba mengambil data disebabkan : "+anError.getErrorDetail(), Toast.LENGTH_SHORT).show();
+
+                getBinding().parentLottie.setVisibility(View.VISIBLE);
+                getBinding().rvGenreDetail.setVisibility(View.GONE);
+                getBinding().parentButton.setVisibility(View.GONE);
+
             }
         });
     }
