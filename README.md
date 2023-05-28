@@ -64,6 +64,9 @@ Java.
 ### Bagian Fragment Pegaturan
 ![Fragment Pengaturan](app/src/main/res/pengaturan.png)
 
+### Bagian jika terjadi error saat memuat data
+![Error](app/src/main/res/Screenshot_20230529-011645.png)
+
 
 ### Bagian Halaman Detail Genre
 ![Halaman Detail Genre](app/src/main/res/halaman_detail_genre.png)
