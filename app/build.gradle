@@ -6,11 +6,12 @@ plugins {
 android {
     signingConfigs {
         release {
-            storeFile file('D:\\keystore\\keyKomik.jks')
+            storeFile file('C:\\Users\\Ridh\\keystore\\keyKomikU.jks')
             storePassword 'sandibaru5'
             keyAlias 'key0'
             keyPassword 'sandibaru5'
         }
+
     }
     namespace 'com.komikatow.komiku'
     compileSdk 33
