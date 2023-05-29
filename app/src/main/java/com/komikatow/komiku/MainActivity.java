@@ -42,7 +42,7 @@ public final class MainActivity extends BaseActivity <ActivityMainBinding> imple
         setFrament(new FragmentHome());
         getBinding().mainBottomBar.setSelectedItemId(R.id.action_home);
         onItemMenuSelected();
-        Networking.getUpdate(this, this);
+
 
     }
 
@@ -148,6 +148,7 @@ public final class MainActivity extends BaseActivity <ActivityMainBinding> imple
         super.onResume();
 
         NoInternet.Companion.checkInternet(getLifecycle(), this);
+        Networking.getUpdate(this, this);
     }
 
 }

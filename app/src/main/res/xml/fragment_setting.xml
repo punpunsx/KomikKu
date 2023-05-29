@@ -20,6 +20,12 @@
             android:summary="Selalu simpan gambar pada cache\nJika diaktifkan maka ini akan menyimpan gambar pada cache aplikasi\nsehingga ketika lain waktu ditampilkan lagi ini tidak akan menggunakan data / wifi"
             app:key="cache"
             />
+        <Preference
+            app:title="Advance"
+            app:summary="Mengatur ukuran slider dan gambar detail komik secara kostum"
+            android:key="advance"
+            android:icon="@drawable/baseline_photo_size_select_large_24"
+            />
 
         <SwitchPreference
             app:title="Mode Baca"

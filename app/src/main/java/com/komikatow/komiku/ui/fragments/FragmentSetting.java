@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -13,10 +14,11 @@ import androidx.preference.SwitchPreference;
 
 import com.komikatow.komiku.BuildConfig;
 import com.komikatow.komiku.R;
+import com.komikatow.komiku.ui.activityes.AdvanceActivity;
 
 public final class FragmentSetting extends PreferenceFragmentCompat {
     private SwitchPreference mode, animasiDetail, animasiTransisi, cache, quality;
-    private Preference bahasa, bug;
+    private Preference bahasa, bug, advance;
     private boolean modeSummary;
     private boolean modeBahasa;
     private boolean modeAnmasiDetail;
@@ -33,6 +35,7 @@ public final class FragmentSetting extends PreferenceFragmentCompat {
         animasiTransisi = findPreference("animasiTransisi");
         cache = findPreference("cache");
         quality = findPreference("quality");
+        advance = findPreference("advance");
 
         bahasa = findPreference("bahasa");
         bug = findPreference("bug");
@@ -52,6 +55,14 @@ public final class FragmentSetting extends PreferenceFragmentCompat {
             return true;
         });
 
+
+        final Preference size = findPreference("advance");
+        size.setOnPreferenceClickListener(preference -> {
+            startActivity(new Intent(getContext(), AdvanceActivity.class));
+
+            return true;
+        });
+
         checkBahasaSaatIni();
         bahasa.setOnPreferenceChangeListener((preference, newValue) -> {
             boolean newMode = (boolean)  newValue;
@@ -65,10 +76,12 @@ public final class FragmentSetting extends PreferenceFragmentCompat {
                 cache.setSummary("Always save images in cache\nIf enabled, this will save images in the application cache\nSo that the next time they are displayed again this will not use data/wifi");
                 quality.setTitle("Image Quality");
                 quality.setSummary("Always show the best quality");
+                advance.setSummary("Adjust the size of the slider and draw comic details based on the costume");
 
                 if (modeSummary) {
                     mode.setTitle(" Read mode");
-                    mode.setSummary(" Current mode : Slide");
+                    mode.setSummary(" Current mode : Slider");
+
                 } else {
                     mode.setTitle(" Read mode");
                     mode.setSummary(" Current mode : Scrool");
@@ -101,9 +114,10 @@ public final class FragmentSetting extends PreferenceFragmentCompat {
                 cache.setSummary("Selalu simpan gambar pada cache\nJika diaktifkan maka ini akan menyimpan gambar pada cache aplikasi\nSehingga ketika lain waktu ditampilkan lagi ini tidak akan menggunakan data / wifi");
                 quality.setTitle("Qualitas gambar");
                 quality.setSummary("Selalu tampilkan qualitas terbaik");
+                advance.setSummary("Mengatur ukuran slider dan gambar detail komik secara kostum");
 
                 if (modeSummary) {
-                    mode.setSummary(" Mode Saat ini : Slide");
+                    mode.setSummary(" Mode Saat ini : Slider");
                     mode.setTitle(" Mode Baca");
                 } else {
                     mode.setSummary(" Mode Saat ini : Scrool");
@@ -137,7 +151,7 @@ public final class FragmentSetting extends PreferenceFragmentCompat {
             if (modeBahasa){
                 if (newModeBaca){
                     mode.setTitle(" Read mode");
-                    mode.setSummary(" Current mode : Slide");
+                    mode.setSummary(" Current mode : Slider");
 
                 }else {
                     mode.setTitle(" Read mode");
@@ -175,6 +189,7 @@ public final class FragmentSetting extends PreferenceFragmentCompat {
             cache.setSummary("Always save images in cache\nIf enabled, this will save images in the application cache\nSo that the next time they are displayed again this will not use data/wifi");
             quality.setTitle("Image Quality");
             quality.setSummary("Always show the best quality");
+            advance.setSummary("Adjust the size of the slider and draw comic details based on the costume");
 
             if (modeSummary) {
                 mode.setSummary(" Current mode : Slide");
@@ -212,6 +227,7 @@ public final class FragmentSetting extends PreferenceFragmentCompat {
             cache.setSummary("Selalu simpan gambar pada cache\nJika diaktifkan maka ini akan menyimpan gambar pada cache aplikasi\nSehingga ketika lain waktu ditampilkan lagi ini tidak akan menggunakan data / wifi");
             quality.setTitle("Qualitas gambar");
             quality.setSummary("Selalu tampilkan qualitas terbaik");
+            advance.setSummary("Mengatur ukuran slider dan gambar detail komik secara kostum");
 
             if (modeSummary) {
                 mode.setSummary(" Mode Saat ini : Slide");

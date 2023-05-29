@@ -3,6 +3,7 @@ package com.komikatow.komiku.adapter;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +16,8 @@ import com.github.islamkhsh.CardSliderAdapter;
 import com.komikatow.komiku.R;
 import com.komikatow.komiku.databinding.ItemHomeKomikJepangBinding;
 import com.komikatow.komiku.model.ModelBaseKomik;
+import com.komikatow.komiku.room.dbApp.AdvanceDbApp;
+import com.komikatow.komiku.room.enity.AdvanceSizeEnity;
 import com.komikatow.komiku.utils.ItemRecyclerClick;
 
 import java.util.List;
@@ -47,6 +50,17 @@ public class AdapterKomikJepang extends CardSliderAdapter<AdapterKomikJepang.Kom
         binding.itemTitle.setText(list.get(i).getTitle());
         komikJepangHolder.itemView.setOnClickListener(v-> listener.onClickListener(i));
 
+        new Thread(() -> {
+
+            AdvanceDbApp database = AdvanceDbApp.getInstance(context);
+            List<AdvanceSizeEnity> getALl = database.dao().getAll();
+
+            if (!getALl.isEmpty()){
+                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) binding.cardLayout.getLayoutParams();
+                params.height = Integer.parseInt(getALl.get(0).getSlider());
+            }
+
+        }).start();
     }
 
     @NonNull

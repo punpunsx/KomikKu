@@ -16,16 +16,19 @@ import com.androidnetworking.error.ANError;
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.komikatow.komiku.MainActivity;
 import com.komikatow.komiku.R;
 import com.komikatow.komiku.adapter.AdapterChapter;
 import com.komikatow.komiku.adapter.AdapterGenre;
 import com.komikatow.komiku.databinding.ActivityDetailBinding;
-import com.komikatow.komiku.room.enity.ModelChapter;
 import com.komikatow.komiku.model.ModelGenre;
+import com.komikatow.komiku.room.dbApp.AdvanceDbApp;
 import com.komikatow.komiku.room.dbApp.FavoriteDbApp;
 import com.komikatow.komiku.room.dbApp.HistoryDbApp;
+import com.komikatow.komiku.room.enity.AdvanceSizeEnity;
 import com.komikatow.komiku.room.enity.FavoriteEnity;
+import com.komikatow.komiku.room.enity.ModelChapter;
 import com.komikatow.komiku.utils.DialogsKt;
 import com.komikatow.komiku.utils.Endpoints;
 import com.komikatow.komiku.utils.ItemRecyclerClick;
@@ -49,6 +52,8 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
     private String chapterName;
     private String waktu;
     private String endpointDetail;
+
+    //cek apakah state dari switchPreference sedang on / off
     private boolean transitionStatus;
     private boolean animasiGambar;
     private boolean getBahasa;
@@ -83,6 +88,21 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
             }
 
         });
+        getDbAdvance();
+    }
+
+    private void getDbAdvance(){
+        new Thread(() -> {
+
+            AdvanceDbApp database = AdvanceDbApp.getInstance(getApplicationContext());
+            List<AdvanceSizeEnity> getALl = database.dao().getAll();
+
+            if (!getALl.isEmpty()){
+                CollapsingToolbarLayout.LayoutParams params = (CollapsingToolbarLayout.LayoutParams) getBinding().detailImage.getLayoutParams();
+                params.height = Integer.parseInt(getALl.get(0).getDetail());
+            }
+
+        }).start();
     }
 
     private void getDetailKomik(){
