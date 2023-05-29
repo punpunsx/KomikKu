@@ -15,7 +15,7 @@ Jika app tidak berfungsi mungkin api yg digunakan oleh app ini sudah mati
 - History baca
 - Simpan komik untuk dibaca nanti
 
-# App Issue 
+# App Issues
 - Biasanya / kebanyakan komik korea, dan china gambar terlalu kecil
 - jika app dijalankan di tab mungkin sebagian tampilan terlalu kecil
 
@@ -39,7 +39,7 @@ Install my-project with android studio
   - paste urL project ini / buka from directory dan navigasikan ke projek ini 
 ```
 
-## 🚀 Tentang saya
+## 🚀 About Me
 
 Saat ini saya sedang belajar mengembangkan app menggunakan android studio dengan bahasa Java dan kotlin, pada saat app ini dibuat umur saya 17 tahun.
 
@@ -62,7 +62,13 @@ Java.
 ![Fragment Riwayat](app/src/main/res/riwayat.png)
  
 ### Bagian Fragment Pegaturan
-![Fragment Pengaturan](app/src/main/res/pengaturan.png)
+![Fragment Pengaturan](app/src/main/res/Screenshot_20230529-011825.png)
+
+### Bagian jika terjadi error saat memuat data
+![Error](app/src/main/res/Screenshot_20230529-011645.png)
+
+### Bagian jika terjadi error saat tidak ada koneksi internet
+![NoInternet](app/src/main/res/Screenshot_20230529-012854.png)
 
 
 ### Bagian Halaman Detail Genre
