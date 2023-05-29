@@ -1,6 +1,5 @@
 package com.komikatow.komiku.ui.activityes;
 
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -54,8 +53,14 @@ public final class BacaActivitty extends BaseActivity <ActivityBacaBinding>{
         bahasa = sharedPreferences.getBoolean("bahasa", true);
 
         getBinding().toolbar.setNavigationOnClickListener(v->{
-            finish();
-            Animatoo.INSTANCE.animateSwipeRight(this);
+
+            if (transitionStatus){
+                finish();
+                Animatoo.INSTANCE.animateSwipeRight(this);
+
+            }else {
+                finish();
+            }
         });
 
         if (bahasa){

@@ -85,6 +85,9 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
             if (transitionStatus){
                 finish();
                 Animatoo.INSTANCE.animateSwipeRight(this);
+
+            }else {
+                finish();
             }
 
         });

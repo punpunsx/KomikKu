@@ -1,17 +1,18 @@
 package com.komikatow.komiku.ui.activityes;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceManager;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.komikatow.komiku.databinding.AdvanceSetingBinding;
 import com.komikatow.komiku.room.dbApp.AdvanceDbApp;
 import com.komikatow.komiku.room.enity.AdvanceSizeEnity;
-
-import java.util.List;
 
 public final class AdvanceActivity extends BaseActivity <AdvanceSetingBinding> {
     private AdvanceDbApp database;
@@ -28,6 +29,19 @@ public final class AdvanceActivity extends BaseActivity <AdvanceSetingBinding> {
         super.onCreate(savedInstanceState);
 
         getEditTextInput();
+        getBinding().toolbar.setNavigationOnClickListener(v->{
+
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+            boolean isTransition = sharedPreferences.getBoolean("animasiTransisi", false);
+
+            if (isTransition){
+                finish();
+                Animatoo.INSTANCE.animateSwipeRight(this);
+            }else {
+                finish();
+            }
+
+        });
     }
     private void getEditTextInput(){
 
