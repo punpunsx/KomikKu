@@ -120,6 +120,7 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
             public void onHttpsResponse(JSONObject jsonObject) {
 
                 try {
+
                     final String type = getIntent().getStringExtra("type");
                     titleKomik = jsonObject.getString("title").replace("\n", " ").trim();
                     thumbnail = jsonObject.getString("thumb");
@@ -137,7 +138,7 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
                     getBinding().tvStatus.setText("Status : "+jsonObject.getString("status").trim());
                     getBinding().tvAuthor.setText("Author : "+jsonObject.getString("author").trim());
                     getBinding().tvIlustrator.setText("Illustrator : "+jsonObject.getString("illustator").trim());
-                    getBinding().tvRating.setRating(Float.parseFloat(jsonObject.getString("score").trim()));
+                    getBinding().tvRating.setRating(Float.parseFloat(jsonObject.getString("score").trim()) / 2);
 
                     if (type != null && !type.isEmpty() && type != " "){
                         getBinding().tvType.setVisibility(View.VISIBLE);

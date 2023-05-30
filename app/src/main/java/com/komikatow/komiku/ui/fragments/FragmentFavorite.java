@@ -46,7 +46,7 @@ public final class FragmentFavorite extends BaseFragment <FragmentFavoriteBindin
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
         isTransition = sharedPreferences.getBoolean("animasiTransisi", false);
         getBahasa = sharedPreferences.getBoolean("bahasa", true);
-        getAllItem();
+
         getConfigLangague();
     }
 
@@ -132,5 +132,12 @@ public final class FragmentFavorite extends BaseFragment <FragmentFavoriteBindin
             msg = "Hapus : ";
             from = " dari favorite";
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        getAllItem();
     }
 }

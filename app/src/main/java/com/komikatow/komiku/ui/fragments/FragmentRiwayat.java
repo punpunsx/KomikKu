@@ -46,7 +46,8 @@ public final class FragmentRiwayat extends BaseFragment <FragmentRiwayatBinding>
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
         getBahasa = sharedPreferences.getBoolean("bahasa", true);
-        getAllData();
+
+
         getConfigLangague();
 
     }
@@ -137,4 +138,9 @@ public final class FragmentRiwayat extends BaseFragment <FragmentRiwayatBinding>
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getAllData();
+    }
 }

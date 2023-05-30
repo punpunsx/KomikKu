@@ -16,7 +16,6 @@ import com.komikatow.komiku.databinding.ItemHistoryBinding;
 import com.komikatow.komiku.room.enity.ModelChapter;
 import com.komikatow.komiku.utils.ItemRecyclerClick;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 

@@ -1,7 +1,6 @@
 package com.komikatow.komiku;
 
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -11,6 +10,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceManager;
 
 import com.google.android.material.navigation.NavigationBarView;
@@ -24,6 +25,7 @@ import com.komikatow.komiku.utils.Networking;
 import com.komikatow.komiku.utils.NoInternet;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 public final class MainActivity extends BaseActivity <ActivityMainBinding> implements NavigationBarView.OnItemSelectedListener {
@@ -39,7 +41,7 @@ public final class MainActivity extends BaseActivity <ActivityMainBinding> imple
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setFrament(new FragmentHome());
+        setFrament(new FragmentHome(),"home_tag");
         getBinding().mainBottomBar.setSelectedItemId(R.id.action_home);
         onItemMenuSelected();
 
@@ -64,34 +66,54 @@ public final class MainActivity extends BaseActivity <ActivityMainBinding> imple
         getBinding().mainBottomBar.setOnItemSelectedListener(this);
     }
 
-    private void setFrament(Fragment frament){
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.mainContainer ,frament)
-                .commit();
+    private void setFrament(Fragment frament, @Nullable String tag){
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Fragment existFragment = fragmentManager.findFragmentByTag(tag);
+
+        if (existFragment != null){
+            fragmentTransaction.show(existFragment);
+        }else {
+            fragmentTransaction.add(R.id.mainContainer, frament, tag);
+        }
+
+        List<Fragment> fragments = fragmentManager.getFragments();
+        if (fragments != null){
+            for (Fragment frag : fragments){
+                if (frag != existFragment){
+                    fragmentTransaction.hide(frag);
+                }
+            }
+        }
+
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+
+
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         if (item.getItemId() == R.id.action_home){
-            setFrament(new FragmentHome());
+            setFrament(new FragmentHome(), "home_tag");
             refleshWithNewLangague();
 
         } else if (item.getItemId() ==  R.id.action_fav) {
-            setFrament(new FragmentFavorite());
+            setFrament(new FragmentFavorite(), null);
             refleshWithNewLangague();
 
         } else if (item.getItemId() ==  R.id.action_riwayat) {
-            setFrament(new FragmentRiwayat());
+            setFrament(new FragmentRiwayat(), null);
             refleshWithNewLangague();
 
         } else if (item.getItemId() ==  R.id.action_setting) {
-            setFrament(new FragmentSetting());
+            setFrament(new FragmentSetting(), null);
             refleshWithNewLangague();
 
         }else {
-            setFrament(new FragmentHome());
+            setFrament(new FragmentHome(), "home_tag");
             refleshWithNewLangague();
         }
 
@@ -131,15 +153,6 @@ public final class MainActivity extends BaseActivity <ActivityMainBinding> imple
 
         Handler handler = new Handler();
         handler.postDelayed(() -> isTwoClick = false, 5000);
-
-    }
-
-    @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        getBinding().mainBottomBar.setSelectedItemId(R.id.action_home);
-        setFrament(new FragmentHome());
 
     }
 

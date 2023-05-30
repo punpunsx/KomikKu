@@ -125,7 +125,7 @@ public final class FragmentHome extends BaseFragment <FragmentHomeBinding> imple
 
             @Override
             public void onHttpsError(ANError anError) {
-
+                DialogsKt.dismissDialogLoading();
                 Toast.makeText(getContext(), "Error on : "+anError.getErrorDetail(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -162,6 +162,7 @@ public final class FragmentHome extends BaseFragment <FragmentHomeBinding> imple
                     }
 
                 } catch (JSONException e) {
+                    DialogsKt.dismissDialogLoading();
                     e.printStackTrace();
                 }
             }
@@ -232,6 +233,7 @@ public final class FragmentHome extends BaseFragment <FragmentHomeBinding> imple
             @Override
             public void onHttpsError(ANError anError) {
 
+                DialogsKt.dismissDialogLoading();
                 Toast.makeText(getContext(), "Error on : "+anError.getErrorDetail(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -282,6 +284,7 @@ public final class FragmentHome extends BaseFragment <FragmentHomeBinding> imple
             @Override
             public void onHttpsError(ANError anError) {
 
+                DialogsKt.dismissDialogLoading();
                 Toast.makeText(getContext(), "Error on : "+anError.getErrorDetail(), Toast.LENGTH_SHORT).show();
             }
         });
