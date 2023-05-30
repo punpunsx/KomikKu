@@ -16,6 +16,8 @@ import com.komikatow.komiku.databinding.ItemHistoryBinding;
 import com.komikatow.komiku.room.enity.ModelChapter;
 import com.komikatow.komiku.utils.ItemRecyclerClick;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.RiwayatHolder> {
@@ -29,6 +31,7 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.RiwayatH
         this.context = context;
         this.list = list;
         this.listener = listener;
+        Collections.reverse(list);
     }
 
     @NonNull

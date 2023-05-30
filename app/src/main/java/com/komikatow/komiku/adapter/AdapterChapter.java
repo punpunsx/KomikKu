@@ -2,11 +2,14 @@ package com.komikatow.komiku.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.komikatow.komiku.R;
@@ -43,7 +46,9 @@ public class AdapterChapter extends RecyclerView.Adapter<AdapterChapter.ChapterH
     @Override
     public void onBindViewHolder(@NonNull ChapterHolder holder, int position) {
 
-       final int uiConfigureMode = activity.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean modeCh = sharedPreferences.getBoolean("modeCh", true);
+        final int uiConfigureMode = activity.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
 
 
         if (uiConfigureMode == Configuration.UI_MODE_NIGHT_YES){
@@ -53,6 +58,15 @@ public class AdapterChapter extends RecyclerView.Adapter<AdapterChapter.ChapterH
         } else if (uiConfigureMode == Configuration.UI_MODE_NIGHT_NO) {
             binding.itemChapterName.setText(list.get(position).getNemeCh().replace("\n", " "));
             binding.itemChapterName.setTextColor(activity.getResources().getColor(R.color.black));
+        }
+
+
+        if (!modeCh){
+
+            RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) binding.parent.getLayoutParams();
+            params.width = LinearLayout.LayoutParams.MATCH_PARENT;
+            params.height = LinearLayout.LayoutParams.WRAP_CONTENT;
+
         }
 
         binding.itemChapterName.setOnClickListener(v-> listener.onClickListener(position));

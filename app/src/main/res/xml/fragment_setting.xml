@@ -21,7 +21,7 @@
             app:key="cache"
             />
         <Preference
-            app:title="Advance"
+            app:title="Ukuran kostum"
             app:summary="Mengatur ukuran slider dan gambar detail komik secara kostum"
             android:key="advance"
             android:icon="@drawable/baseline_photo_size_select_large_24"
@@ -32,6 +32,11 @@
             app:summary="Mode Saat ini : Scrool"
             android:icon="@drawable/baseline_menu_book_24"
             app:key="mode"/>
+
+        <SwitchPreference
+            app:defaultValue="true"
+            android:icon="@drawable/baseline_grid_view_24"
+            app:key="modeCh"/>
 
 
         <SwitchPreference

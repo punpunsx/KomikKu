@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.androidnetworking.error.ANError;
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
@@ -57,6 +58,7 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
     private boolean transitionStatus;
     private boolean animasiGambar;
     private boolean getBahasa;
+    private boolean modeCh;
 
 
     @Override
@@ -79,6 +81,8 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
         transitionStatus = sharedPreferences.getBoolean("animasiTransisi", false);
         animasiGambar = sharedPreferences.getBoolean("animasiGambar", true);
         getBahasa = sharedPreferences.getBoolean("bahasa", true);
+        modeCh = sharedPreferences.getBoolean("modeCh", true);
+
 
         getBinding().toolbar.setNavigationOnClickListener(v->{
 
@@ -235,13 +239,21 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
     private void adapterChapter(List<ModelChapter> listChapter) {
 
         AdapterChapter adapterChapter = new AdapterChapter(this, this, listChapter,this);
-        getBinding().rvChapter.setLayoutManager(new GridLayoutManager(this, 4));
         getBinding().rvChapter.setAdapter(adapterChapter);
 
         if (getBahasa){
             getBinding().tvTotalCh.setText("Total Chapters : "+ adapterChapter.getItemCount());
         }else {
             getBinding().tvTotalCh.setText("Jumlah Chapter : "+ adapterChapter.getItemCount());
+        }
+
+
+        if (modeCh){
+            getBinding().rvChapter.setLayoutManager(new GridLayoutManager(getApplicationContext(), 4));
+
+        }else {
+            getBinding().rvChapter.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
         }
 
     }

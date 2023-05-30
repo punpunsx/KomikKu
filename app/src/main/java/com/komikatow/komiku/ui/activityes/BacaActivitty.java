@@ -142,12 +142,17 @@ public final class BacaActivitty extends BaseActivity <ActivityBacaBinding>{
 
         Intent intent = new Intent(this, BacaActivitty.class);
         intent.putExtra("endpoint",endpoint);
-        startActivity(intent);
+
 
         if (transitionStatus){
+
             startActivity(intent);
             finish();
             Animatoo.INSTANCE.animateZoom(this);
+
+        }else{
+            startActivity(intent);
+            finish();
         }
 
     }

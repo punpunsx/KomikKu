@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -17,12 +16,13 @@ import com.komikatow.komiku.R;
 import com.komikatow.komiku.ui.activityes.AdvanceActivity;
 
 public final class FragmentSetting extends PreferenceFragmentCompat {
-    private SwitchPreference mode, animasiDetail, animasiTransisi, cache, quality;
+    private SwitchPreference mode, animasiDetail, animasiTransisi, cache, quality, modeCh;
     private Preference bahasa, bug, advance;
     private boolean modeSummary;
     private boolean modeBahasa;
     private boolean modeAnmasiDetail;
     private boolean modeAnmasiTransisi;
+    private boolean modeChOrientation;
 
 
     @Override
@@ -36,6 +36,7 @@ public final class FragmentSetting extends PreferenceFragmentCompat {
         cache = findPreference("cache");
         quality = findPreference("quality");
         advance = findPreference("advance");
+        modeCh  = findPreference("modeCh");
 
         bahasa = findPreference("bahasa");
         bug = findPreference("bug");
@@ -43,8 +44,17 @@ public final class FragmentSetting extends PreferenceFragmentCompat {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
         modeSummary = sharedPreferences.getBoolean("mode", false);
         modeBahasa = sharedPreferences.getBoolean("bahasa", true);
+        modeChOrientation = sharedPreferences.getBoolean("modeCh", true);
         modeAnmasiDetail  = sharedPreferences.getBoolean("animasiGambar", false);
         modeAnmasiTransisi = sharedPreferences.getBoolean("animasiTransisi", false);
+
+
+        checkCurrentLanguage();
+        onPreferenceClickOrStateChange();
+
+    }
+
+    private void onPreferenceClickOrStateChange(){
 
         bug.setOnPreferenceClickListener(preference -> {
 
@@ -57,92 +67,24 @@ public final class FragmentSetting extends PreferenceFragmentCompat {
 
 
         final Preference size = findPreference("advance");
+        assert size != null;
         size.setOnPreferenceClickListener(preference -> {
             startActivity(new Intent(getContext(), AdvanceActivity.class));
 
             return true;
         });
 
-        checkBahasaSaatIni();
+
         bahasa.setOnPreferenceChangeListener((preference, newValue) -> {
             boolean newMode = (boolean)  newValue;
 
             if (newMode){
-
-                bahasa.setTitle("App language");
-                bahasa.setSummary(" Current language Inggris");
-
-                bug.setTitle("Report bug");
-                cache.setSummary("Always save images in cache\nIf enabled, this will save images in the application cache\nSo that the next time they are displayed again this will not use data/wifi");
-                quality.setTitle("Image Quality");
-                quality.setSummary("Always show the best quality");
-                advance.setSummary("Adjust the size of the slider and draw comic details based on the costume");
-
-                if (modeSummary) {
-                    mode.setTitle(" Read mode");
-                    mode.setSummary(" Current mode : Slider");
-
-                } else {
-                    mode.setTitle(" Read mode");
-                    mode.setSummary(" Current mode : Scrool");
-                }
-
-                if (modeAnmasiDetail){
-                    animasiDetail.setTitle(" Detail animation");
-                    animasiDetail.setSummary("Always animate detailed comic drawings");
-
-                }else {
-                    animasiDetail.setTitle(" Detail animation");
-                    animasiDetail.setSummary(" Always animate detailed comic drawings");
-                }
-
-                if (modeAnmasiTransisi) {
-                    animasiTransisi.setTitle(" Transition Animation");
-                    animasiTransisi.setSummary(" Always animate transitions between pages");
-
-                }else {
-                    animasiTransisi.setTitle(" Transition Animation");
-                    animasiTransisi.setSummary(" Always animate transitions between pages");
-                }
+               ingrisLangague();
 
             } else {
-
-                bahasa.setTitle("Bahasa aplikasi");
-                bahasa.setSummary(" Bahasa saat ini Indonesia");
-
-                bug.setTitle("Laporkan Bug");
-                cache.setSummary("Selalu simpan gambar pada cache\nJika diaktifkan maka ini akan menyimpan gambar pada cache aplikasi\nSehingga ketika lain waktu ditampilkan lagi ini tidak akan menggunakan data / wifi");
-                quality.setTitle("Qualitas gambar");
-                quality.setSummary("Selalu tampilkan qualitas terbaik");
-                advance.setSummary("Mengatur ukuran slider dan gambar detail komik secara kostum");
-
-                if (modeSummary) {
-                    mode.setSummary(" Mode Saat ini : Slider");
-                    mode.setTitle(" Mode Baca");
-                } else {
-                    mode.setSummary(" Mode Saat ini : Scrool");
-                    mode.setTitle(" Mode Baca");
-                }
-
-                if (modeAnmasiDetail){
-                    animasiDetail.setTitle(" Animasi Detail");
-                    animasiDetail.setSummary("Selalu animasikan gambar detail komik");
-
-                }else {
-                    animasiDetail.setTitle(" Animasi Detail");
-                    animasiDetail.setSummary("Selalu animasikan gambar detail komik");
-                }
-
-                if (modeAnmasiTransisi) {
-                    animasiTransisi.setTitle(" Animasi Transisi");
-                    animasiTransisi.setSummary(" Selalu animasikan transisi antar halaman");
-
-                }else {
-                    animasiTransisi.setTitle(" Animasi Transisi");
-                    animasiTransisi.setSummary(" Selalu animasikan transisi antar halaman");
-                }
-
+                bahasaIndonesia();
             }
+
             return true;
         });
         mode.setOnPreferenceChangeListener((preference, newValue) -> {
@@ -171,91 +113,149 @@ public final class FragmentSetting extends PreferenceFragmentCompat {
             return true;
         });
 
+
+        modeCh.setOnPreferenceChangeListener((preference, newValue) -> {
+
+            boolean newModeCh = (boolean) newValue;
+
+            if (modeBahasa){
+
+                if (newModeCh){
+                    modeCh.setTitle(" List Chapter mode");
+                    modeCh.setSummary(" Current mode : Grid x4");
+
+                }else {
+                    modeCh.setTitle(" List Chapter mode");
+                    modeCh.setSummary(" Current mode : List");
+
+                }
+
+            }else {
+                if (!newModeCh){
+                    modeCh.setTitle(" Mode list bab");
+                    modeCh.setSummary(" Mode saat ini : grid x4");
+                }else {
+                    modeCh.setTitle(" Mode list bab");
+                    modeCh.setSummary( "Mode saat ini : List");
+                }
+            }
+            return true;
+        });
+
         Preference version = findPreference("version");
+        assert version != null;
         version.setSummary("Package : " + BuildConfig.APPLICATION_ID + "\n" + "Version : " + BuildConfig.VERSION_NAME);
 
 
-
     }
 
-    private void checkBahasaSaatIni(){
+    private void checkCurrentLanguage(){
 
         if (modeBahasa){
-
-            bahasa.setTitle("App language");
-            bahasa.setSummary(" Current language Inggris");
-
-            bug.setTitle("Report bug");
-            cache.setSummary("Always save images in cache\nIf enabled, this will save images in the application cache\nSo that the next time they are displayed again this will not use data/wifi");
-            quality.setTitle("Image Quality");
-            quality.setSummary("Always show the best quality");
-            advance.setSummary("Adjust the size of the slider and draw comic details based on the costume");
-
-            if (modeSummary) {
-                mode.setSummary(" Current mode : Slide");
-                mode.setTitle(" Read mode");
-            } else {
-                mode.setSummary(" Current mode : Scrool");
-                mode.setTitle(" Read mode");
-            }
-
-            if (modeAnmasiDetail){
-                animasiDetail.setTitle(" Detail animation");
-                animasiDetail.setSummary("Always animate detailed comic drawings");
-
-            }else {
-                animasiDetail.setTitle(" Detail animation");
-                animasiDetail.setSummary(" Always animate detailed comic drawings");
-            }
-
-            if (modeAnmasiTransisi) {
-                animasiTransisi.setTitle(" Transition Animation");
-                animasiTransisi.setSummary(" Always animate transitions between pages");
-
-            }else {
-                animasiTransisi.setTitle(" Transition Animation");
-                animasiTransisi.setSummary(" Always animate transitions between pages");
-            }
-
+            ingrisLangague();
 
         } else {
-
-            bahasa.setTitle("Bahasa aplikasi");
-            bahasa.setSummary(" Bahasa saat ini Indonesia");
-
-            bug.setTitle("Laporkan Bug");
-            cache.setSummary("Selalu simpan gambar pada cache\nJika diaktifkan maka ini akan menyimpan gambar pada cache aplikasi\nSehingga ketika lain waktu ditampilkan lagi ini tidak akan menggunakan data / wifi");
-            quality.setTitle("Qualitas gambar");
-            quality.setSummary("Selalu tampilkan qualitas terbaik");
-            advance.setSummary("Mengatur ukuran slider dan gambar detail komik secara kostum");
-
-            if (modeSummary) {
-                mode.setSummary(" Mode Saat ini : Slide");
-                mode.setTitle(" Mode Baca");
-            } else {
-                mode.setSummary(" Mode Saat ini : Scrool");
-                mode.setTitle(" Mode Baca");
-            }
-
-            if (modeAnmasiDetail){
-                animasiDetail.setTitle(" Animasi Detail");
-                animasiDetail.setSummary("Selalu animasikan gambar detail komik");
-
-            }else {
-                animasiDetail.setTitle(" Animasi Detail");
-                animasiDetail.setSummary("Selalu animasikan gambar detail komik");
-            }
-
-            if (modeAnmasiTransisi) {
-                animasiTransisi.setTitle(" Animasi Transisi");
-                animasiTransisi.setSummary(" Selalu animasikan transisi antar halaman");
-
-            }else {
-                animasiTransisi.setTitle(" Animasi Transisi");
-                animasiTransisi.setSummary(" Selalu animasikan transisi antar halaman");
-            }
-
+            bahasaIndonesia();
         }
+
     }
 
+    private void bahasaIndonesia(){
+
+        bahasa.setTitle("Bahasa aplikasi");
+        bahasa.setSummary(" Bahasa saat ini Indonesia");
+
+        bug.setTitle("Laporkan Bug");
+        cache.setSummary("Selalu simpan gambar pada cache\nJika diaktifkan maka ini akan menyimpan gambar pada cache aplikasi\nSehingga ketika lain waktu ditampilkan lagi ini tidak akan menggunakan data / wifi");
+        quality.setTitle("Qualitas gambar");
+        quality.setSummary("Selalu tampilkan qualitas terbaik");
+        advance.setSummary("Ukuan kostum");
+        advance.setSummary("Mengatur ukuran slider dan gambar detail komik secara kostum");
+
+        if (modeSummary) {
+            mode.setSummary(" Mode Saat ini : Slider");
+            mode.setTitle(" Mode Baca");
+        } else {
+            mode.setSummary(" Mode Saat ini : Scrool");
+            mode.setTitle(" Mode Baca");
+        }
+
+        if (modeChOrientation){
+            modeCh.setTitle(" Mode list bab");
+            modeCh.setSummary(" Mode saat ini : grid x4");
+        }else {
+            modeCh.setTitle(" Mode list bab");
+            modeCh.setSummary( "Mode saat ini : List");
+        }
+
+        if (modeAnmasiDetail){
+            animasiDetail.setTitle(" Animasi Detail");
+            animasiDetail.setSummary("Selalu animasikan gambar detail komik");
+
+        }else {
+            animasiDetail.setTitle(" Animasi Detail");
+            animasiDetail.setSummary("Selalu animasikan gambar detail komik");
+        }
+
+        if (modeAnmasiTransisi) {
+            animasiTransisi.setTitle(" Animasi Transisi");
+            animasiTransisi.setSummary(" Selalu animasikan transisi antar halaman");
+
+        }else {
+            animasiTransisi.setTitle(" Animasi Transisi");
+            animasiTransisi.setSummary(" Selalu animasikan transisi antar halaman");
+        }
+
+    }
+
+    private void ingrisLangague(){
+
+        bahasa.setTitle("App language");
+        bahasa.setSummary(" Current language Inggris");
+
+        bug.setTitle("Report bug");
+        cache.setSummary("Always save images in cache\nIf enabled, this will save images in the application cache\nSo that the next time they are displayed again this will not use data/wifi");
+        quality.setTitle("Image Quality");
+        quality.setSummary("Always show the best quality");
+        advance.setSummary("Custum size");
+        advance.setSummary("Adjust the size of the slider and draw comic details based on the costume");
+
+        if (modeSummary) {
+            mode.setTitle(" Read mode");
+            mode.setSummary(" Current mode : Slider");
+
+        } else {
+            mode.setTitle(" Read mode");
+            mode.setSummary(" Current mode : Scrool");
+        }
+
+        if (modeChOrientation){
+            modeCh.setTitle(" List Chapter mode");
+            modeCh.setSummary(" Current mode : Grid x4");
+
+        }else {
+            modeCh.setTitle(" List Chapter mode");
+            modeCh.setSummary(" Current mode : List");
+
+        }
+
+        if (modeAnmasiDetail){
+            animasiDetail.setTitle(" Detail animation");
+            animasiDetail.setSummary("Always animate detailed comic drawings");
+
+        }else {
+            animasiDetail.setTitle(" Detail animation");
+            animasiDetail.setSummary(" Always animate detailed comic drawings");
+        }
+
+        if (modeAnmasiTransisi) {
+            animasiTransisi.setTitle(" Transition Animation");
+            animasiTransisi.setSummary(" Always animate transitions between pages");
+
+        }else {
+            animasiTransisi.setTitle(" Transition Animation");
+            animasiTransisi.setSummary(" Always animate transitions between pages");
+        }
+
+    }
 }

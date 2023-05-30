@@ -50,8 +50,15 @@ public class AdapterKomikJepang extends CardSliderAdapter<AdapterKomikJepang.Kom
         binding.itemTitle.setText(list.get(i).getTitle());
         komikJepangHolder.itemView.setOnClickListener(v-> listener.onClickListener(i));
 
-        new Thread(() -> {
+    }
 
+    @NonNull
+    @Override
+    public KomikJepangHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        binding = ItemHomeKomikJepangBinding.inflate(LayoutInflater.from(context), parent, false);
+
+
+        new Thread(() -> {
             AdvanceDbApp database = AdvanceDbApp.getInstance(context);
             List<AdvanceSizeEnity> getALl = database.dao().getAll();
 
@@ -61,13 +68,7 @@ public class AdapterKomikJepang extends CardSliderAdapter<AdapterKomikJepang.Kom
             }
 
         }).start();
-    }
 
-    @NonNull
-    @Override
-    public KomikJepangHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        binding = ItemHomeKomikJepangBinding.inflate(LayoutInflater.from(context), parent, false);
         return new KomikJepangHolder(binding);
     }
 
