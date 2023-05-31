@@ -6,18 +6,23 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.SwitchPreference;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.komikatow.komiku.BuildConfig;
 import com.komikatow.komiku.R;
 import com.komikatow.komiku.ui.activityes.AdvanceActivity;
+import com.komikatow.komiku.ui.activityes.backup.MainBackupActivity;
 
 public final class FragmentSetting extends PreferenceFragmentCompat {
     private SwitchPreference mode, animasiDetail, animasiTransisi, cache, quality, modeCh;
+    private ListPreference server;
     private Preference bahasa, bug, advance;
+    private String modeServer;
     private boolean modeSummary;
     private boolean modeBahasa;
     private boolean modeAnmasiDetail;
@@ -38,6 +43,7 @@ public final class FragmentSetting extends PreferenceFragmentCompat {
         advance = findPreference("advance");
         modeCh  = findPreference("modeCh");
 
+        server =findPreference("listServer");
         bahasa = findPreference("bahasa");
         bug = findPreference("bug");
 
@@ -47,7 +53,7 @@ public final class FragmentSetting extends PreferenceFragmentCompat {
         modeChOrientation = sharedPreferences.getBoolean("modeCh", true);
         modeAnmasiDetail  = sharedPreferences.getBoolean("animasiGambar", false);
         modeAnmasiTransisi = sharedPreferences.getBoolean("animasiTransisi", false);
-
+        modeServer = sharedPreferences.getString("listServer", "Default Server");
 
         checkCurrentLanguage();
         onPreferenceClickOrStateChange();
@@ -70,6 +76,28 @@ public final class FragmentSetting extends PreferenceFragmentCompat {
         assert size != null;
         size.setOnPreferenceClickListener(preference -> {
             startActivity(new Intent(getContext(), AdvanceActivity.class));
+
+            return true;
+        });
+
+        server.setOnPreferenceChangeListener((preference, newValue) -> {
+            modeServer = (String) newValue;
+
+            if (modeServer.equals("Default Server")){
+
+            } else if (modeServer.equals("Backup Server")) {
+
+                if (modeAnmasiTransisi){
+
+                    startActivity(new Intent(getContext(), MainBackupActivity.class));
+                    Animatoo.INSTANCE.animateZoom(requireContext());
+                    requireActivity().finish();
+
+                }else {
+                    startActivity(new Intent(getContext(), MainBackupActivity.class));
+                    requireActivity().finish();
+                }
+            }
 
             return true;
         });
@@ -171,6 +199,8 @@ public final class FragmentSetting extends PreferenceFragmentCompat {
         quality.setSummary("Selalu tampilkan qualitas terbaik");
         advance.setSummary("Ukuan kostum");
         advance.setSummary("Mengatur ukuran slider dan gambar detail komik secara kostum");
+        server.setTitle("List Server");
+        server.setSummary("Mengubah, dan melihat server yang tersedia\nDigunakan jika server utama error");
 
         if (modeSummary) {
             mode.setSummary(" Mode Saat ini : Slider");
@@ -219,6 +249,8 @@ public final class FragmentSetting extends PreferenceFragmentCompat {
         quality.setSummary("Always show the best quality");
         advance.setSummary("Custum size");
         advance.setSummary("Adjust the size of the slider and draw comic details based on the costume");
+        server.setTitle("List Servers");
+        server.setSummary("Mengubah, dan melihat server yang tersedia\nDigunakan jika server utama error");
 
         if (modeSummary) {
             mode.setTitle(" Read mode");

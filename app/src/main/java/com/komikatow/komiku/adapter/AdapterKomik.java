@@ -3,9 +3,9 @@ package com.komikatow.komiku.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Animatable;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.preference.PreferenceManager;
@@ -18,6 +18,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.komikatow.komiku.databinding.ItemHomeKomikChinaKoreaBinding;
 import com.komikatow.komiku.model.ModelBaseKomik;
 import com.komikatow.komiku.ui.activityes.DetailActivity;
+import com.komikatow.komiku.ui.activityes.backup.DetailBackupActivity;
 
 import java.util.List;
 
@@ -54,19 +55,42 @@ public class AdapterKomik extends RecyclerView.Adapter<AdapterKomik.KomikHolder>
         binding.itemTitle.setText(list.get(position).getTitle());
         holder.itemView.setOnClickListener(V-> {
 
-            Intent intent = new Intent(context, DetailActivity.class);
-            intent.putExtra("endpoint", list.get(position).getEndPoint());
-            intent.putExtra("type", list.get(position).getType());
-
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
             boolean transitionStatus = sharedPreferences.getBoolean("animasiTransisi", false);
+            String defValue = sharedPreferences.getString("listServer", "Default Server");
 
-            if (transitionStatus){
-                context.startActivity(intent);
-                Animatoo.INSTANCE.animateZoom(context);
+            if (!defValue.equals("Default Server")){
+                Intent intent = new Intent(context, DetailBackupActivity.class);
+                intent.putExtra("endpoint", list.get(position).getEndPoint());
+                intent.putExtra("type", list.get(position).getType());
+
+                if (transitionStatus){
+                    Toast.makeText(context, "To backupDetail", Toast.LENGTH_SHORT).show();
+                    context.startActivity(intent);
+                    Animatoo.INSTANCE.animateZoom(context);
+
+                }else {
+                    Toast.makeText(context, "To backupDetail", Toast.LENGTH_SHORT).show();
+                    context.startActivity(intent);
+                }
 
             }else {
-                context.startActivity(intent);
+
+                Intent intent = new Intent(context, DetailActivity.class);
+                intent.putExtra("endpoint", list.get(position).getEndPoint());
+                intent.putExtra("type", list.get(position).getType());
+
+
+                if (transitionStatus){
+                    Toast.makeText(context, "To Detail", Toast.LENGTH_SHORT).show();
+                    context.startActivity(intent);
+                    Animatoo.INSTANCE.animateZoom(context);
+
+                }else {
+                    Toast.makeText(context, "To Detail", Toast.LENGTH_SHORT).show();
+                    context.startActivity(intent);
+                }
+
             }
         });
 

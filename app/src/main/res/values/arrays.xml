@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="listServer">
+
+        <item>"Default Server"</item>
+        <item>"Backup Server"</item>
+
+    </array>
+
+    <array name="listTheme">
+
+        <item>"Dark Mode"</item>
+        <item>"Light Mode"</item>
+        <item>"Default System"</item>
+    </array>
+</resources>

@@ -1,4 +1,4 @@
-package com.komikatow.komiku;
+package com.komikatow.komiku.ui.activityes.backup;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,24 +13,18 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceManager;
 
-import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+import com.komikatow.komiku.MainActivity;
+import com.komikatow.komiku.R;
 import com.komikatow.komiku.databinding.ActivityMainBinding;
 import com.komikatow.komiku.ui.activityes.BaseActivity;
-import com.komikatow.komiku.ui.activityes.backup.MainBackupActivity;
-import com.komikatow.komiku.ui.fragments.FragmentFavorite;
-import com.komikatow.komiku.ui.fragments.FragmentHome;
-import com.komikatow.komiku.ui.fragments.FragmentRiwayat;
-import com.komikatow.komiku.ui.fragments.FragmentSetting;
-import com.komikatow.komiku.utils.Networking;
-import com.komikatow.komiku.utils.NoInternet;
+import com.komikatow.komiku.ui.fragments.backup.BackUpHomeFragment;
+import com.komikatow.komiku.utils.DialogsKt;
+import com.komikatow.komiku.utils.OnDialogListener;
 
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
-public final class MainActivity extends BaseActivity <ActivityMainBinding> {
+public class MainBackupActivity extends BaseActivity<ActivityMainBinding> {
     private boolean isTwoClick = false;
-    public static volatile String hasilDate;
 
     @Override
     protected ActivityMainBinding createBinding(LayoutInflater layoutInflater) {
@@ -41,68 +35,41 @@ public final class MainActivity extends BaseActivity <ActivityMainBinding> {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean isTransition = sharedPreferences.getBoolean("animasiTransisi", false);
-        String defValue = sharedPreferences.getString("listServer", "Default Server");
+        DialogsKt.setAlertDialog(this, "Alert", "Ini adalah server Backup digunakan jika server utama error\nJika ingin kembali ke server utama silahkan ketuk tombol back 2x", false, new OnDialogListener() {
+            @Override
+            public void onOkeButton() {
 
-        if (defValue.equals("Default Server")){
-
-            setFrament(new FragmentHome(),"home_tag");
-            getBinding().mainBottomBar.setSelectedItemId(R.id.action_home);
-            onItemMenuSelected();
-
-        }else if (defValue.equals("Backup Server")){
-            if (isTransition){
-
-                startActivity(new Intent(getApplicationContext(), MainBackupActivity.class));
-                Animatoo.INSTANCE.animateZoom(this);
-                finish();
-
-            }else {
-                startActivity(new Intent(getApplicationContext(), MainBackupActivity.class));
-                finish();
             }
-        }
+
+            @Override
+            public void onCencleButton() {
+
+            }
+        });
+        DialogsKt.showAlertDialog();
+        setFrament(new BackUpHomeFragment(), "backup_home");
+        onItemMenuSelected();
     }
 
-    public static void getTimeInLocale(){
 
-        Calendar calendar = Calendar.getInstance(Locale.getDefault());
-        final int date = calendar.get(Calendar.DAY_OF_MONTH);
-        final int month = calendar.get(Calendar.MONTH);
-        final int year = calendar.get(Calendar.YEAR);
+    private void onItemMenuSelected() {
 
-        final int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        final int minute = calendar.get(Calendar.MINUTE);
-
-        hasilDate = date + "-" + month + "-"+year + " : "+hour + ":" + minute ;
-
-    }
-
-    private void onItemMenuSelected(){
         getBinding().mainBottomBar.setOnItemSelectedListener(item -> {
 
             if (item.getItemId() == R.id.action_home){
-                setFrament(new FragmentHome(), "home_tag");
+                setFrament(new BackUpHomeFragment(), "backup_home");
                 refleshWithNewLangague();
 
-            } else if (item.getItemId() ==  R.id.action_fav) {
-                setFrament(new FragmentFavorite(), null);
+            } else if (item.getItemId() == R.id.action_fav) {
                 refleshWithNewLangague();
 
-            } else if (item.getItemId() ==  R.id.action_riwayat) {
-                setFrament(new FragmentRiwayat(), null);
+            } else if (item.getItemId() == R.id.action_riwayat) {
                 refleshWithNewLangague();
 
-            } else if (item.getItemId() ==  R.id.action_setting) {
-                setFrament(new FragmentSetting(), null);
+            }else if (item.getItemId() == R.id.action_setting){
                 refleshWithNewLangague();
 
-            }else {
-                setFrament(new FragmentHome(), "home_tag");
-                refleshWithNewLangague();
             }
-
             return true;
         });
     }
@@ -154,27 +121,26 @@ public final class MainActivity extends BaseActivity <ActivityMainBinding> {
         }
 
     }
+
     @Override
     public void onBackPressed() {
 
         if (isTwoClick){
-            super.onBackPressed();
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = sharedPreferences.edit().putString("listServer", "Default Server");
+            editor.apply();
+
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
             return;
         }
 
         isTwoClick = true;
-        Toast.makeText(this, "Tekan tombol back 1 kali lagi untuk keluar", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Tekan tombol back 1 kali lagi untuk Kembali ke server utama", Toast.LENGTH_SHORT).show();
 
         Handler handler = new Handler();
         handler.postDelayed(() -> isTwoClick = false, 5000);
-
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
 
-        NoInternet.Companion.checkInternet(getLifecycle(), this);
-        Networking.getUpdate(this, this);
-    }
 }
