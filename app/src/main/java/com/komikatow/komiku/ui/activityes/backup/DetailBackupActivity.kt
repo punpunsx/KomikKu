@@ -22,7 +22,6 @@ import com.komikatow.komiku.model.ModelGenre
 import com.komikatow.komiku.room.enity.ModelChapter
 import com.komikatow.komiku.ui.activityes.BaseActivity
 import com.komikatow.komiku.utils.Endpoints
-import com.komikatow.komiku.utils.ItemRecyclerClick
 import com.komikatow.komiku.utils.Networking
 import com.komikatow.komiku.utils.dialogProgressCustum
 import org.json.JSONObject

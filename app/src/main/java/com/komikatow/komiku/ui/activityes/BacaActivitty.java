@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.androidnetworking.error.ANError;
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;

@@ -17,8 +17,8 @@ import com.komikatow.komiku.adapter.AdapterKomik
 import com.komikatow.komiku.adapter.AdapterKomikJepang
 import com.komikatow.komiku.databinding.FragmentHomeBinding
 import com.komikatow.komiku.model.ModelBaseKomik
-import com.komikatow.komiku.ui.activityes.DetailActivity
 import com.komikatow.komiku.ui.activityes.SearchActivity
+import com.komikatow.komiku.ui.activityes.backup.DetailBackupActivity
 import com.komikatow.komiku.ui.fragments.BaseFragment
 import com.komikatow.komiku.utils.Endpoints
 import com.komikatow.komiku.utils.ItemRecyclerClick
@@ -106,7 +106,7 @@ class BackUpHomeFragment : BaseFragment<FragmentHomeBinding> () {
         val adapterKomikJepang = AdapterKomikJepang(context, listKomikJepangBackup, object : ItemRecyclerClick{
             override fun onClickListener(pos: Int) {
 
-                val intent = Intent(context, DetailActivity::class.java)
+                val intent = Intent(context, DetailBackupActivity::class.java)
                 intent.putExtra("endpoint", listKomikJepangBackup[pos].endPoint)
                 intent.putExtra("type", listKomikJepangBackup[pos].type)
 
