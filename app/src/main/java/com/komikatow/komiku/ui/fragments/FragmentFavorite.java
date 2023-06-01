@@ -58,10 +58,10 @@ public final class FragmentFavorite extends BaseFragment <FragmentFavoriteBindin
             allData = database.dao().getAllData();
 
             if (allData.isEmpty()){
-                requireActivity().runOnUiThread(()-> getBinding().itemNull.setVisibility(View.VISIBLE));
+                requireActivity().runOnUiThread(()-> getBinding().parentLottie.setVisibility(View.VISIBLE));
 
             }else {
-                requireActivity().runOnUiThread(()-> getBinding().itemNull.setVisibility(View.GONE));
+                requireActivity().runOnUiThread(()-> getBinding().parentLottie.setVisibility(View.GONE));
             }
 
             adapterFavorite = new AdapterFavorite(allData, getContext(), new ItemRecyclerClick() {

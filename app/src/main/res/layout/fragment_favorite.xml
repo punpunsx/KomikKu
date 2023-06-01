@@ -4,34 +4,41 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/appbar">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:title="Favorite Menu"
-            app:titleCentered="true"/>
-    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:overScrollMode="never"
         android:layout_margin="10dp"
-        android:layout_below="@id/appbar"
         android:id="@+id/rvFav"/>
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10sp"
+        android:layout_height="match_parent"
         android:visibility="gone"
-        android:layout_centerInParent="true"
-        android:text=" Anda belum menambahkan komik favorite, silahkan klik icon favorie pada detail komik untuk menyimpan data\n Untuk menghapus data silahkan tekan komik yg ingin dihapus datanya"
-        android:drawableStart="@drawable/baseline_info_24"
-        android:id="@+id/itemNull"/>
+        android:id="@+id/parentLottie">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            app:lottie_fileName="nothing_in_here.json"
+            android:id="@+id/lottie"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10sp"
+            android:layout_below="@id/lottie"
+            android:gravity="center_horizontal"
+            android:text="Masih sepi disini, seperti whatsapp mu 😅"
+            android:layout_centerHorizontal="true"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:id="@+id/itemNull"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>

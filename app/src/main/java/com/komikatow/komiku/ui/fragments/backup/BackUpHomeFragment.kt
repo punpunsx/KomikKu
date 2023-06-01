@@ -57,14 +57,19 @@ class BackUpHomeFragment : BaseFragment<FragmentHomeBinding> () {
 
         if (sharedPreferences!!.getBoolean("bahasa", true)) {
             binding.txtKomikJepangId.text = "Japanese comics"
-            binding.txtGenreId.text = "List Genre"
-            binding.txtReleaseId.text = "Latest comic updates"
+            binding.txtGenreId.text = "Populer comics"
+            binding.txtReleaseId.text = "Recoomended comics"
             binding.txtKomikKoreaId.text = "Korean comics"
             binding.txtKomikChinaId.text = "Chinese comics"
             setDialogLoading(requireContext(), "Loading...", "Please Wait", true)
             showDialogLoading()
 
         } else {
+            binding.txtKomikJepangId.text = "Komik Jepang"
+            binding.txtGenreId.text = "Komik Populer"
+            binding.txtReleaseId.text = "Rekomendasi komik"
+            binding.txtKomikKoreaId.text = "Komik populer"
+            binding.txtKomikChinaId.text = "Komik China"
             setDialogLoading(requireContext(), "Loading...", "Mohon tunggu sebentar", true)
             showDialogLoading()
         }

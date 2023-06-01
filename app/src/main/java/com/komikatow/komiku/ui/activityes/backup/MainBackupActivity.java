@@ -54,7 +54,7 @@ public class MainBackupActivity extends BaseActivity<ActivityMainBinding> {
 
     private void onItemMenuSelected() {
 
-        getBinding().mainBottomBar.setOnItemSelectedListener(item -> {
+        getBinding().bottomNav.setOnItemSelectedListener(item -> {
 
             if (item.getItemId() == R.id.action_home){
                 setFrament(new BackUpHomeFragment(), "backup_home");
@@ -83,7 +83,7 @@ public class MainBackupActivity extends BaseActivity<ActivityMainBinding> {
         if (existFragment != null){
             fragmentTransaction.show(existFragment);
         }else {
-            fragmentTransaction.add(R.id.mainContainer, frament, tag);
+            fragmentTransaction.add(R.id.containerMain, frament, tag);
         }
 
         List<Fragment> fragments = fragmentManager.getFragments();
@@ -108,16 +108,16 @@ public class MainBackupActivity extends BaseActivity<ActivityMainBinding> {
 
         if (bahasaSaatIni){
 
-            getBinding().mainBottomBar.getMenu().findItem(R.id.action_home).setTitle("Home");
-            getBinding().mainBottomBar.getMenu().findItem(R.id.action_fav).setTitle("Favorite");
-            getBinding().mainBottomBar.getMenu().findItem(R.id.action_riwayat).setTitle("History");
-            getBinding().mainBottomBar.getMenu().findItem(R.id.action_setting).setTitle("Settings");
+            getBinding().bottomNav.getMenu().findItem(R.id.action_home).setTitle("Home");
+            getBinding().bottomNav.getMenu().findItem(R.id.action_fav).setTitle("Favorite");
+            getBinding().bottomNav.getMenu().findItem(R.id.action_riwayat).setTitle("History");
+            getBinding().bottomNav.getMenu().findItem(R.id.action_setting).setTitle("Settings");
 
         }else {
-            getBinding().mainBottomBar.getMenu().findItem(R.id.action_home).setTitle("Rumah");
-            getBinding().mainBottomBar.getMenu().findItem(R.id.action_fav).setTitle("Favorite");
-            getBinding().mainBottomBar.getMenu().findItem(R.id.action_riwayat).setTitle("Riwayat");
-            getBinding().mainBottomBar.getMenu().findItem(R.id.action_setting).setTitle("Pengaturan");
+            getBinding().bottomNav.getMenu().findItem(R.id.action_home).setTitle("Rumah");
+            getBinding().bottomNav.getMenu().findItem(R.id.action_fav).setTitle("Favorite");
+            getBinding().bottomNav.getMenu().findItem(R.id.action_riwayat).setTitle("Riwayat");
+            getBinding().bottomNav.getMenu().findItem(R.id.action_setting).setTitle("Pengaturan");
         }
 
     }

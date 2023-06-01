@@ -71,10 +71,10 @@ public final class FragmentRiwayat extends BaseFragment <FragmentRiwayatBinding>
             });
 
             if (data.isEmpty()){
-                requireActivity().runOnUiThread(()-> getBinding().itemNull.setVisibility(View.VISIBLE));
+                requireActivity().runOnUiThread(()-> getBinding().parentLottie.setVisibility(View.VISIBLE));
 
             }else {
-                requireActivity().runOnUiThread(()-> getBinding().itemNull.setVisibility(View.GONE));
+                requireActivity().runOnUiThread(()-> getBinding().parentLottie.setVisibility(View.GONE));
             }
 
         }).start();
