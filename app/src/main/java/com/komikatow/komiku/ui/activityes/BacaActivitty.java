@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.androidnetworking.error.ANError;
@@ -112,7 +113,13 @@ public final class BacaActivitty extends BaseActivity <ActivityBacaBinding>{
         AdapterChapterDetail adapterChapterDetail = new AdapterChapterDetail(list, this);
         getBinding().vPager.setAdapter(adapterChapterDetail);
 
-        getVpPosition();
+        if (modeBaca){
+            getBinding().vPager.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        }else {
+            getBinding().vPager.setLayoutManager(new LinearLayoutManager(this));
+        }
+
     }
 
     private void onNextOrPrevChClick(JSONObject jsonObject) throws JSONException{
@@ -157,30 +164,9 @@ public final class BacaActivitty extends BaseActivity <ActivityBacaBinding>{
 
     }
 
-    @SuppressLint("SetTextI18n")
-    private void getVpPosition(){
-
-        getBinding().vPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-
-                getBinding().hal.setText("Hal : "+position);
-            }
-        });
-
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
-
-        if (modeBaca){
-            getBinding().vPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
-
-        }else {
-            getBinding().vPager.setOrientation(ViewPager2.ORIENTATION_VERTICAL);
-        }
 
         NoInternet.Companion.checkInternet(getLifecycle(), this);
     }

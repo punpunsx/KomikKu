@@ -18,13 +18,18 @@ public class AdapterGenre extends RecyclerView.Adapter<AdapterGenre.GenreHolder>
     private ItemGenreBinding binding;
     private final Context context;
     private final List<ModelGenre <String> > list;
-    private final ItemRecyclerClick listener;
+    private ItemRecyclerClick listener;
 
     public AdapterGenre(Context context, List<ModelGenre<String>> list, ItemRecyclerClick listener) {
         this.context = context;
         this.list = list;
         this.listener = listener;
 
+    }
+
+    public AdapterGenre(Context context, List<ModelGenre <String>> list){
+        this.context = context;
+        this.list = list;
     }
 
     @NonNull
@@ -39,7 +44,11 @@ public class AdapterGenre extends RecyclerView.Adapter<AdapterGenre.GenreHolder>
     @Override
     public void onBindViewHolder(@NonNull GenreHolder holder, int position) {
         binding.itemGenreName.setText(list.get(position).getGenre());
-        binding.itemGenreName.setOnClickListener(v-> listener.onClickListener(position));
+
+        if (listener != null){
+            binding.itemGenreName.setOnClickListener(v-> listener.onClickListener(position));
+        }
+
     }
 
     @Override

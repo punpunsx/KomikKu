@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/appbar"
-       >
+        >
 
         <com.google.android.material.appbar.MaterialToolbar
             android:layout_width="match_parent"
@@ -25,32 +25,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/appbar"
-        android:layout_above="@id/parentButton"
-        android:id="@+id/vPager"/>
+        android:id="@+id/rvChDetail"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="10dp"
-        android:id="@+id/parentButton">
-
-
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:enabled="false"
-            android:id="@+id/btn_sebelumnya"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:enabled="false"
-            android:id="@+id/btn_selanjutnya"/>
-
-    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/parentLottie"

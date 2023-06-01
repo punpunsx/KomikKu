@@ -17,6 +17,7 @@ import com.komikatow.komiku.adapter.AdapterKomik
 import com.komikatow.komiku.adapter.AdapterKomikJepang
 import com.komikatow.komiku.databinding.FragmentHomeBinding
 import com.komikatow.komiku.model.ModelBaseKomik
+import com.komikatow.komiku.ui.activityes.DetailActivity
 import com.komikatow.komiku.ui.activityes.SearchActivity
 import com.komikatow.komiku.ui.fragments.BaseFragment
 import com.komikatow.komiku.utils.Endpoints
@@ -45,9 +46,6 @@ class BackUpHomeFragment : BaseFragment<FragmentHomeBinding> () {
         super.onViewCreated(view, savedInstanceState)
 
         getBackupManga()
-        getPopulerManga()
-        getNewRelease()
-        getBackupManhwa()
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
         binding.btnSarch.setOnClickListener { v ->
@@ -108,9 +106,23 @@ class BackUpHomeFragment : BaseFragment<FragmentHomeBinding> () {
         val adapterKomikJepang = AdapterKomikJepang(context, listKomikJepangBackup, object : ItemRecyclerClick{
             override fun onClickListener(pos: Int) {
 
+                val intent = Intent(context, DetailActivity::class.java)
+                intent.putExtra("endpoint", listKomikJepangBackup[pos].endPoint)
+                intent.putExtra("type", listKomikJepangBackup[pos].type)
+
+
+                val transitionStatus = sharedPreferences!!.getBoolean("animasiTransisi", false)
+
+                if (transitionStatus) {
+                    startActivity(intent)
+                    animateZoom(requireContext())
+                } else {
+                    startActivity(intent)
+                }
             }
         })
         binding.rvKomikJepangSlider.adapter = adapterKomikJepang
+        getPopulerManga()
     }
 
     private fun getPopulerManga(){
@@ -149,6 +161,7 @@ class BackUpHomeFragment : BaseFragment<FragmentHomeBinding> () {
         binding.rvListGenre.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.rvListGenre.adapter = adapter
 
+        getNewRelease()
     }
 
     private fun getNewRelease(){
@@ -187,6 +200,7 @@ class BackUpHomeFragment : BaseFragment<FragmentHomeBinding> () {
         binding.rvRelease.layoutManager = GridLayoutManager(context, 3)
         binding.rvRelease.adapter = adapter
 
+        getBackupManhwa()
     }
 
     private fun getBackupManhwa(){

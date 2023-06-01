@@ -65,12 +65,10 @@ public class AdapterKomik extends RecyclerView.Adapter<AdapterKomik.KomikHolder>
                 intent.putExtra("type", list.get(position).getType());
 
                 if (transitionStatus){
-                    Toast.makeText(context, "To backupDetail", Toast.LENGTH_SHORT).show();
                     context.startActivity(intent);
                     Animatoo.INSTANCE.animateZoom(context);
 
                 }else {
-                    Toast.makeText(context, "To backupDetail", Toast.LENGTH_SHORT).show();
                     context.startActivity(intent);
                 }
 
@@ -82,12 +80,10 @@ public class AdapterKomik extends RecyclerView.Adapter<AdapterKomik.KomikHolder>
 
 
                 if (transitionStatus){
-                    Toast.makeText(context, "To Detail", Toast.LENGTH_SHORT).show();
                     context.startActivity(intent);
                     Animatoo.INSTANCE.animateZoom(context);
 
                 }else {
-                    Toast.makeText(context, "To Detail", Toast.LENGTH_SHORT).show();
                     context.startActivity(intent);
                 }
 

@@ -22,7 +22,7 @@ public final class Endpoints {
     public static final String KOMIK_SEARCH_BACKUP = "https://komiku-api.fly.dev/api/comic/search/";
     public static final String KOMIK_POPULER_BACKUP = "https://komiku-api.fly.dev/api/comic/popular/page/1";
     public static final String KOMIK_DETAIL_BACKUP = "https://komiku-api.fly.dev/api/comic/info/";
-    public static final String KOMIK_DETAIL_CHAPTER_BACKUP = "https://komiku-api.fly.dev/api/comic/list?filter=manga";
+    public static final String KOMIK_DETAIL_CHAPTER_BACKUP = "https://komiku-api.fly.dev/api/comic/chapter";
 
     // API KEY
     public static final String BASE_UPDATE_API = "https://api.jsonbin.io/v3/b/6472b6919d312622a36693d4/";

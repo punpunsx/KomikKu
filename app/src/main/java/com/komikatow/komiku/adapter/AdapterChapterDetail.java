@@ -52,7 +52,7 @@ public class AdapterChapterDetail extends RecyclerView.Adapter<AdapterChapterDet
         Glide.with(context)
                 .load(list.get(position).getImage())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .override(Target.SIZE_ORIGINAL)
+                .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
                 .priority(Priority.IMMEDIATE)
                 .timeout(15000)
                 .placeholder(R.color.PlaceHolderImage)
