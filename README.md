@@ -1,7 +1,7 @@
 
 # KomikU Apps
 
-Data dari app ini diambil dari Api https://github.com/KatowProject/komikato_py,
+Data dari app ini diambil dari Api https://github.com/KatowProject/komikato_py, https://github.com/Romi666/komikku-api.
 Jika app tidak berfungsi mungkin api yg digunakan oleh app ini sudah mati
 
 # App Features
@@ -16,7 +16,7 @@ Jika app tidak berfungsi mungkin api yg digunakan oleh app ini sudah mati
 - Simpan komik untuk dibaca nanti
 
 # App Issues
-- Biasanya / kebanyakan komik korea, dan china gambar terlalu kecil
+- Biasanya / kebanyakan komik korea, dan china gambar terlalu kecil(Berhasil diperbaiki pada mode scrool)
 - jika app dijalankan di tab mungkin sebagian tampilan terlalu kecil
 
 ## Authors 
