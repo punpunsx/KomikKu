@@ -25,7 +25,6 @@ import com.komikatow.komiku.model.ModelBaseKomik;
 import com.komikatow.komiku.model.ModelGenre;
 import com.komikatow.komiku.ui.activityes.DetailActivity;
 import com.komikatow.komiku.ui.activityes.GenreDetail;
-import com.komikatow.komiku.ui.activityes.SearchActivity;
 import com.komikatow.komiku.utils.DialogsKt;
 import com.komikatow.komiku.utils.Endpoints;
 import com.komikatow.komiku.utils.ItemRecyclerClick;
@@ -59,13 +58,6 @@ public final class FragmentHome extends BaseFragment <FragmentHomeBinding> imple
 
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
-        getBinding().btnSarch.setOnClickListener(v-> {
-            startActivity(new Intent(getContext(), SearchActivity.class));
-            if (sharedPreferences.getBoolean("animasiTransisi", false)){
-                Animatoo.INSTANCE.animateZoom(requireContext());
-            }
-        });
-
         if (sharedPreferences.getBoolean("bahasa", true)){
             getBinding().txtKomikJepangId.setText("Japanese comics");
             getBinding().txtGenreId.setText("List Genre");

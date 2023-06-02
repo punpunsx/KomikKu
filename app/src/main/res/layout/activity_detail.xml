@@ -190,9 +190,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            app:lottie_fileName="page_not_found.json"
             app:lottie_autoPlay="true"
-            app:lottie_loop="true"/>
+            app:lottie_fileName="page_not_found.json"
+            app:lottie_loop="true" />
 
     </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

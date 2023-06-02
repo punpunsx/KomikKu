@@ -42,10 +42,6 @@
             android:theme="@style/Base.Theme.KomikU"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.activityes.SearchActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"/>
-
 
         <activity android:name=".ui.activityes.GenreDetail"
             android:exported="false"

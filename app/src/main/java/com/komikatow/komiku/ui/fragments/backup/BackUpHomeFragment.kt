@@ -17,7 +17,6 @@ import com.komikatow.komiku.adapter.AdapterKomik
 import com.komikatow.komiku.adapter.AdapterKomikJepang
 import com.komikatow.komiku.databinding.FragmentHomeBinding
 import com.komikatow.komiku.model.ModelBaseKomik
-import com.komikatow.komiku.ui.activityes.SearchActivity
 import com.komikatow.komiku.ui.activityes.backup.DetailBackupActivity
 import com.komikatow.komiku.ui.fragments.BaseFragment
 import com.komikatow.komiku.utils.Endpoints
@@ -48,12 +47,6 @@ class BackUpHomeFragment : BaseFragment<FragmentHomeBinding> () {
         getBackupManga()
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        binding.btnSarch.setOnClickListener { v ->
-            startActivity(Intent(context, SearchActivity::class.java))
-            if (sharedPreferences!!.getBoolean("animasiTransisi", false)) {
-                animateZoom(requireContext())
-            }
-        }
 
         if (sharedPreferences!!.getBoolean("bahasa", true)) {
             binding.txtKomikJepangId.text = "Japanese comics"

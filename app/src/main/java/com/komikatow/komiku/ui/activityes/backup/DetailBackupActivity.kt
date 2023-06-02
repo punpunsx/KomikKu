@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +13,7 @@ import com.blogspot.atifsoftwares.animatoolib.Animatoo
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.Target
+import com.google.android.material.snackbar.Snackbar
 import com.komikatow.komiku.R
 import com.komikatow.komiku.adapter.AdapterChapter
 import com.komikatow.komiku.adapter.AdapterGenre
@@ -80,10 +80,13 @@ class DetailBackupActivity : BaseActivity <ActivityDetailBinding>() {
 
             }
 
-            override fun onHttpsError(anError: ANError?) {
-                Toast.makeText(this@DetailBackupActivity, "Error saat mencoba mengambil data disebabkan : " + anError!!.errorDetail, Toast.LENGTH_SHORT).show()
+            override fun onHttpsError(anError: ANError) {
                 dialogProgressCustum.dismiss()
 
+                val rootView:View = findViewById(android.R.id.content)
+                val snackbar = Snackbar.make(applicationContext,rootView, "Terjadi error saat menampilkan data ", Snackbar.LENGTH_SHORT)
+                snackbar.setAction("Tutup") { snackbar.dismiss() }
+                snackbar.show()
                 binding.parentLottie.visibility = View.VISIBLE
                 binding.nested.visibility = View.GONE
             }

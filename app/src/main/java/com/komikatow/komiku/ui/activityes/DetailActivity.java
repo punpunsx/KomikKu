@@ -18,6 +18,7 @@ import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.snackbar.Snackbar;
 import com.komikatow.komiku.MainActivity;
 import com.komikatow.komiku.R;
 import com.komikatow.komiku.adapter.AdapterChapter;
@@ -162,8 +163,11 @@ public final class DetailActivity extends BaseActivity <ActivityDetailBinding> i
             @Override
             public void onHttpsError(ANError anError) {
 
-                Toast.makeText(DetailActivity.this, "Error saat mencoba mengambil data disebabkan : "+anError.getErrorDetail(), Toast.LENGTH_SHORT).show();
                 DialogsKt.dialogProgressCustum.dismiss();
+                View view  =findViewById(android.R.id.content);
+                Snackbar snackbar = Snackbar.make(getApplicationContext(),view, "Terjadi error saat menampilkan data ",Snackbar.LENGTH_SHORT);
+                snackbar.setAction("Tutup", v -> snackbar.dismiss());
+                snackbar.show();
 
                 getBinding().parentLottie.setVisibility(View.VISIBLE);
                 getBinding().nested.setVisibility(View.GONE);

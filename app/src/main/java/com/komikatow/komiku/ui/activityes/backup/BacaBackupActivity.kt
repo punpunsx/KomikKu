@@ -65,7 +65,6 @@ class BacaBackupActivity : BaseActivity<ActivityBacaBackupBinding>() {
             }
 
             override fun onHttpsError(anError: ANError?) {
-                Toast.makeText(this@BacaBackupActivity, "Error saat mencoba mengambil data disebabkan : " + anError!!.errorDetail, Toast.LENGTH_SHORT).show()
                 binding.parentLottie.visibility = View.VISIBLE
 
             }
